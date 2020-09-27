@@ -5,7 +5,6 @@ import mongoose from 'mongoose';
 
 import productRoutes from './routes/productRoutes';
 
-const PORT = 5000;
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
@@ -20,6 +19,6 @@ connection.once('open', () => {
     console.log("MongoDB connection successful :)");
 });
 
-app.listen(PORT, () => {
-    console.log("Server started at http://localhost:" + PORT);
+app.listen(5000, () => {
+    console.log("Server started at http://localhost:5000");
 });

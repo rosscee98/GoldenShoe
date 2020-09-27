@@ -1,10 +1,11 @@
- {
+{
   "name": "goldenshoe",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --watch backend --exec babel-node backend/server.js"
+    "start": "nodemon --watch backend --exec babel-node backend/server.js",
+    "dev": "concurrently --kill-others -p \"[{name}]\" -n \"server,client\" -c \"bgMagenta.bold,bgGreen.bold\"  \"npm start\" \"cd frontend && npm start\""
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,7 @@
     "@babel/core": "^7.11.6",
     "@babel/node": "^7.10.5",
     "@babel/preset-env": "^7.11.5",
+    "concurrently": "^5.3.0",
     "nodemon": "^2.0.4"
   }
 }
