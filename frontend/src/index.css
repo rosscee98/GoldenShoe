@@ -12,35 +12,10 @@ code {
     monospace;
 }
 
-.grid-container {
-  display: grid;
-  grid-template-areas: "header" "main" "footer";
-  grid-template-columns: 1fr;
-  grid-template-rows: 6rem 1fr 4rem; 
-  height: 100%;
-}
-
 /* App.js */
-
-@media (max-width: 100%) {
-  .navbar-collapse {
-      max-height: none;
-  }
-  body {
-      margin: 0;
-  }
-}
 
 .round-edge {
   border-radius: 1rem;
-}
-
-.header {
-  grid-area: header;
-}
-
-.main {
-  grid-area: main;
 }
 
 .footer {
@@ -52,6 +27,29 @@ code {
 
 .img {
   margin: auto;
+}
+
+.navbar {
+  background-color: rgb(250, 229, 159);
+}
+
+.fa {
+  color: white;
+}
+
+.footer {
+  text-align: center;
+}
+
+.footer > .row {
+  /* display: flex;
+  flex-direction: row;
+  align-self: center; */
+  /* margin: auto; */
+}
+
+.footer ul {
+  padding: 0;
 }
 
 /* HomeScreen.js */
@@ -86,26 +84,39 @@ code {
 .carousel-item > img {
   border-radius: 1rem;
   width: 100%;
+  max-height: 40rem;
 }
 
 .carousel-caption {
   position: absolute;
+  background-color: rgb(250, 229, 159); /*rgb(184, 134, 11);*/
+  max-width: 30rem;
+  margin: auto;
+}
+
+.carousel-caption > h3, .carousel-caption > p {
+  color: black;
 }
 
 #tagline {
   font-size: 2.8rem;
   text-align: center;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
   white-space: normal;
 }
 
 #tagline span {
-  background-color: gold;
+  background-color: rgb(250, 229, 159); /*gold;*/
   /* min-width: 50%; */
   /* max-width: 75%; */
   display: break;
   word-wrap: break-word;
   overflow-wrap: break-word;
+}
+
+#tag p {
+  text-align: center;
+  font-size: 1.2rem;
 }
 
 hr {
