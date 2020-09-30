@@ -8,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
+import MensScreen from './screens/MensScreen';
 
 function App() {
   return (
@@ -85,8 +86,9 @@ function App() {
         </Navbar>
         <Route path="/" exact component={HomeScreen} />
         <Route path="/product/:id" component={ProductScreen} />
+        <Route path="/mens" component={MensScreen} />
         <footer className="footer mt-auto">
-          <Row className="justify-content-md-center">
+          <Row className="justify-content-center">
             <ul>
               <li className="list-inline-item"><Link to="/"><i className="fa fa-twitter" /></Link></li>
               <li className="list-inline-item"><Link to="/"><i className="fa fa-facebook" /></Link></li>

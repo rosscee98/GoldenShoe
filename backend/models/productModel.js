@@ -6,9 +6,6 @@ const productSchema = new mongoose.Schema({
         required: true
     },
     image: {
-        type: String
-    },
-    brand: {
         type: String,
         required: true
     },
@@ -28,16 +25,6 @@ const productSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true
-    },
-    ratingAvg: {
-        type: Number,
-        default: 0,
-        required: true
-    },
-    ratingCount: {
-        type: Number,
-        default: 0,
         required: true
     },
 });

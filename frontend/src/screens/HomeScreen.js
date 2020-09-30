@@ -3,54 +3,54 @@ import { Carousel, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import TextLoop from 'react-text-loop';
 
+//<div className="carousel-wrapper d-none d-md-block">
+
 function HomeScreen(props) {
     return <Container className="px-4 pt-0 pb-3" fluid>
-        <div className="carousel-wrapper d-none d-md-block">
-            <Carousel className="round-edge" interval={5000}>
-                <Carousel.Item>
-                    <img 
-                        className="d-block w-100"
-                        src="/images/promo/mensboots.jpg"
-                        alt="First slide"
-                    />
-                    <Carousel.Caption className="round-edge">
-                        <Link to="/">
-                            <h3>50% off men's boots</h3>
-                            <p>Valid during October</p>
-                        </Link>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img 
-                        className="d-block w-100"
-                        src="/images/promo/womensheels.jpg"
-                        alt="Second slide"
-                    />
-                    <Carousel.Caption className="round-edge">
-                        <Link to="/">
-                            <h3>Women's heels</h3>
-                            <p>100's to choose from</p>
-                        </Link>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img 
-                        className="d-block w-100"
-                        src="/images/promo/running.jpg"
-                        alt="Third slide"
-                    />
-                    <Carousel.Caption className="round-edge">
-                        <Link to="/">
-                            <h3>Women's running shoes</h3>
-                            <p>New range available</p>
-                        </Link>
-                    </Carousel.Caption>
-                </Carousel.Item>
-            </Carousel>
-        </div>
+        <Carousel className="round-edge d-none d-md-block" interval={5000}>
+            <Carousel.Item>
+                <img 
+                    className="d-block w-100"
+                    src="/images/promo/mensboots.jpg"
+                    alt="First slide"
+                />
+                <Carousel.Caption className="round-edge">
+                    <Link to="/">
+                        <h3>50% off men's boots</h3>
+                        <p>Valid during October</p>
+                    </Link>
+                </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+                <img 
+                    className="d-block w-100"
+                    src="/images/promo/womensheels.jpg"
+                    alt="Second slide"
+                />
+                <Carousel.Caption className="round-edge">
+                    <Link to="/">
+                        <h3>Women's heels</h3>
+                        <p>100's to choose from</p>
+                    </Link>
+                </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+                <img 
+                    className="d-block w-100"
+                    src="/images/promo/running.jpg"
+                    alt="Third slide"
+                />
+                <Carousel.Caption className="round-edge">
+                    <Link to="/">
+                        <h3>Women's running shoes</h3>
+                        <p>New range available</p>
+                    </Link>
+                </Carousel.Caption>
+            </Carousel.Item>
+        </Carousel>
         <hr className="d-none d-md-block"/>
-        <div id="tag">
-            <h3 id="tagline">
+        <div id="tagline">
+            <h3>
                 Find your next <TextLoop interval="5000" mask="true">
                     <span>dance the night away</span>
                     <span>5-a-side</span>

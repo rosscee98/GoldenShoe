@@ -8,13 +8,10 @@ router.post("/", async (req, res) => {
     const product = new Product({
         name: req.body.name,
         image: req.body.image,
-        brand: req.body.brand,
         price: req.body.price,
         category: req.body.category,
         countInStock: req.body.countInStock,
         description: req.body.description,
-        ratingAvg: req.body.ratingAvg,
-        ratingCount: req.body.ratingCount,
     });
     const newProduct = await product.save();
     if (newProduct) {
@@ -24,10 +21,21 @@ router.post("/", async (req, res) => {
     }
 });
 
-/* Retrieve */
+/* Retrieve all */
 router.get("/", async (req, res) => {
     const products = await Product.find({});
     res.send(products);
+});
+
+/* Retrieve specific */
+router.get("/:id", async (req, res) => {
+    const productId = req.params.id;
+    const product = await Product.findById(productId);
+    if (product) {
+        res.send(product);
+    } else {
+        return res.status(500).send({message: "Error in retrieving product"});
+    }
 });
 
 /* Update */ // same here
@@ -37,12 +45,13 @@ router.put("/:id", async (req, res) => {
     if (product) {
         product.name = req.body.name;
         product.image = req.body.image;
-        product.brand = req.body.brand;
         product.price = req.body.price;
         product.category = req.body.category;
         product.countInStock = req.body.countInStock;
         product.description = req.body.description;
-        const updatedProduct = await product.save();
+        const updatedProduct = await product.save().catch(error => {
+            console.log(error.message);
+        });
         if (updatedProduct) {
             return res.status(200).send({message: "Product updated", data: updatedProduct});
         }
