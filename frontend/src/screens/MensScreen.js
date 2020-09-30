@@ -6,11 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 
 function MensScreen(props) {
-    // console.log(state);
     const productList = useSelector(state => state.productList);
-    console.log('start');
-    console.log(productList);
-    console.log('end');
     const { products, loading, error } = productList;
     const dispatch = useDispatch();
 

@@ -46,6 +46,8 @@ code {
 
 .fa {
   color: white;
+  font-size: 2rem !important;
+  padding: 0 .5rem;
 }
 
 .footer {
@@ -106,8 +108,6 @@ code {
   font-size: 2.8rem;
   text-align: center;
   padding-bottom: 1rem;
-  /* white-space: normal;
-  box-sizing: border-box; */
 }
 
 #tagline h3 span {
