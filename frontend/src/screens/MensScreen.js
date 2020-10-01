@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Breadcrumb, Card, Container } from 'react-bootstrap';
+import { Breadcrumb, Card, Container, Spinner } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -15,17 +15,18 @@ function MensScreen(props) {
         return () => {}
     }, [])
 
-    return loading ? <h3 className="px-4">Loading...</h3> :
-    error ? <h3 className="px-4">{error}</h3> :
-    <Container id="mens-container" className="px-4 pt-0 pb-3" fluid>
-        {/* className="round-edge"  */}
+    return loading ? <Spinner className="mx-4" animation="border" role="status">
+        <span className="sr-only">Loading...</span>
+    </Spinner> :
+    error ? <h3 className="mx-4">{error}</h3> :
+    <Container className="content-container px-4 pt-0 pb-3" fluid>
         <Breadcrumb>
             <LinkContainer to="/">
                 <Breadcrumb.Item>Home</Breadcrumb.Item>
             </LinkContainer>
             <Breadcrumb.Item active="true">Mens</Breadcrumb.Item>
         </Breadcrumb>
-        <div className="products-wrapper px-3 py-2 mt-0 round-edge-bottom">
+        <div className="bg-gold px-3 py-2 mt-0 round-edge-bottom">
             <ul className="products">
                 {
                     products.map(product => {
@@ -45,30 +46,8 @@ function MensScreen(props) {
                     })
                 }
             </ul>
-            {/* <ul className="products">
-                <li>
-                    <Card className="product">
-                        <Link to="/product/1">
-                            <Card.Img variant="top" src="/images/products/mens/product1/img1.jpg" />
-                        </Link>
-                        <Card.Body>
-                            <Link to="/product/1">
-                                <Card.Title>Nike Air Force 1 '07</Card.Title>
-                                <Card.Subtitle className="text-muted">£84.95</Card.Subtitle>
-                            </Link>
-                        </Card.Body>
-                    </Card>
-                </li>
-            </ul> */}
         </div>
     </Container>
 }
-
-// const dispatch = useDispatch();
-
-// useEffect(() => {
-//     dispatch(listProducts());
-//     return () => {}
-// }, [])
 
 export default MensScreen;

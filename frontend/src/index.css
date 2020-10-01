@@ -131,16 +131,11 @@ hr {
 
 /* MensScreen.js */
 
-/* #mens-container {
-  background-color: yellow;
-} */
-
-.products-wrapper {
-  /* background-color: rgb(219, 215, 197); */
+.bg-gold {
   background-color: rgb(216, 220, 224);
 }
 
-#mens-container nav {
+.content-container nav {
   padding-bottom: 0;
 }
 
@@ -175,3 +170,14 @@ hr {
   justify-content: space-between;
   /* max-width: 40rem; */
 }
+
+/* ProductScreen.js */
+/* 
+#product-window {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#product-window Col {
+  flex: 0 1 18rem;
+} */
