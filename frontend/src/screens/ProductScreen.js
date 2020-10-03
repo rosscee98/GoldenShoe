@@ -21,7 +21,12 @@ function ProductScreen(props) {
         return () => {}
     }, []);
 
-    // useEffect(() => sizeSelection.current && sizeSelection.current.focus());
+    useEffect(() => {
+        if (anySizesAvailable) {
+            sizeSelection.current = product.sizesAvailable[0].size; 
+        }
+        return () => {}
+    }, [anySizesAvailable]);
 
     // const handleAddToBasket = () => {
     //     props.history.push("/basket/" + props.match.params.id)
