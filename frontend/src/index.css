@@ -44,6 +44,17 @@ code {
   background-color: rgb(250, 229, 159);
 }
 
+#logo {
+  height: 35px;
+  width: 35px;
+  margin-right: .3rem;
+}
+
+.navbar-page-icon a {
+  cursor: pointer;
+  margin-left: .8rem;
+}
+
 .fa {
   color: white;
   font-size: 2rem !important;
@@ -131,8 +142,12 @@ hr {
 
 /* MensScreen.js */
 
-.bg-gold {
+.bg-dark-grey {
   background-color: rgb(216, 220, 224);
+}
+
+.bg-light-grey {
+  background-color: rgb(228, 231, 235);
 }
 
 .content-container nav {
@@ -172,12 +187,77 @@ hr {
 }
 
 /* ProductScreen.js */
-/* 
-#product-window {
+
+#productWindow {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
 }
 
-#product-window Col {
-  flex: 0 1 18rem;
-} */
+#productImage {
+  flex: 6 3 auto;
+}
+
+#productDesc {
+  flex: 5 1 auto;
+}
+
+/* BasketScreen.js */
+
+.basket {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem;
+  align-items: flex-start;
+}
+
+.basket-list {
+  flex: 3 1 60rem;
+}
+
+.basket-action {
+  flex: 1 1 20rem;
+  background-color: #f8f8f8;
+  border-radius: .5rem;
+  padding: 1rem;
+}
+
+.basket-list-container {
+  padding: 0;
+  list-style-type: none;
+  padding: 1rem;
+}
+
+.basket-list-container li {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: .1rem #808080 solid;
+}
+
+.basket-list-container li img {
+  max-width: 10rem;
+  max-height: 10rem;
+}
+
+.basket-list-container li:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.basket-image {
+  flex: 1 1;
+}
+
+.basket-name {
+  flex: 8 1;
+}
+
+.basket-price {
+  flex: 1 1;
+  font-size: 2.5rem;
+  text-align: right;
+}

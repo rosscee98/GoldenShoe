@@ -26,7 +26,7 @@ function MensScreen(props) {
             </LinkContainer>
             <Breadcrumb.Item active="true">Mens</Breadcrumb.Item>
         </Breadcrumb>
-        <div className="bg-gold px-3 py-2 mt-0 round-edge-bottom">
+        <div className="bg-dark-grey px-3 py-2 mt-0 round-edge-bottom">
             <ul className="products">
                 {
                     products.map(product => {

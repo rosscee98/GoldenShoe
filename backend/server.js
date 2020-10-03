@@ -13,7 +13,8 @@ app.use('/api/products', productRoutes);
 mongoose.connect('mongodb://127.0.0.1:27017/golden-shoe', {
     useNewUrlParser: true,
     useUnifiedTopology: true
-});
+}).catch(error => console.log(error.reason));
+
 const connection = mongoose.connection;
 connection.once('open', () => {
     console.log("MongoDB connection successful :)");

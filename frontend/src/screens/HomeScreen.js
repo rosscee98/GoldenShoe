@@ -52,7 +52,7 @@ function HomeScreen(props) {
         <div id="tagline">
             <h3>
                 Find your next <TextLoop interval="5000" mask="true">
-                    <span>dance the night away</span>
+                    <span>dancing</span>
                     <span>5-a-side</span>
                     <span>working late</span>
                     <span>6am run</span>
