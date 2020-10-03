@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+//import productSizeModel from './productSizeModel';
 
 const productSchema = new mongoose.Schema({
     name: {
@@ -11,22 +12,21 @@ const productSchema = new mongoose.Schema({
     },
     price: {
         type: Number,
-        default: 0,
+        min: 0,
         required: true
     },
     category: {
         type: String,
         required: true
     },
-    countInStock: {
-        type: Number,
-        default: 0,
-        required: true
-    },
     description: {
         type: String,
         required: true
     },
+    sizesAvailable: [{
+        size: Number,
+        countInStock: Number
+    }]
 });
 
 const productModel = mongoose.model('Product', productSchema);

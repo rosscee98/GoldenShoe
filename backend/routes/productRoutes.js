@@ -10,8 +10,9 @@ router.post("/", async (req, res) => {
         image: req.body.image,
         price: req.body.price,
         category: req.body.category,
-        countInStock: req.body.countInStock,
+        //countInStock: req.body.countInStock,
         description: req.body.description,
+        sizesAvailable: req.body.sizesAvailable
     });
     const newProduct = await product.save();
     if (newProduct) {
@@ -47,7 +48,8 @@ router.put("/:id", async (req, res) => {
         product.image = req.body.image;
         product.price = req.body.price;
         product.category = req.body.category;
-        product.countInStock = req.body.countInStock;
+        //product.countInStock = req.body.countInStock;
+        product.sizesAvailable = req.body.sizesAvailable;
         product.description = req.body.description;
         const updatedProduct = await product.save().catch(error => {
             console.log(error.message);

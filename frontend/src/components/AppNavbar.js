@@ -103,7 +103,7 @@ function AppNavbar(props) {
                     <Badge variant="light">
                         { basketTotal > 0 ? basketTotal : null }
                     </Badge>
-                    <span class="sr-only">{ basketTotal > 0 ? "" : "Zero" } items in basket</span>
+                    <span className="sr-only">{ basketTotal > 0 ? "" : "Zero" } items in basket</span>
                 </Button>
             </LinkContainer>
         </span>

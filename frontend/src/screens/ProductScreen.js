@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Breadcrumb, Button, Container, Row, Spinner } from 'react-bootstrap';
+import { Breadcrumb, Button, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
 import { detailsProduct } from '../actions/productActions';
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
@@ -10,6 +10,7 @@ import { AiOutlineHome } from 'react-icons/ai';
 function ProductScreen(props) {
     const productDetails = useSelector(state => state.productDetails);
     const {product, loading, error} = productDetails;
+    const anySizesAvailable = product && (product.sizesAvailable && product.sizesAvailable.length);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -67,13 +68,27 @@ function ProductScreen(props) {
                 <h3>{ product.name }</h3>
                 <p className="text-muted">{ product.category }</p>
                 <p>{ product.description }</p>
-                {
+                {/* {
                     product.countInStock < 20
                         ? <p style={{'color': 'red'}}>{ product.countInStock } left in stock</p>
                         : <div></div>
+                } */}
+                {
+                    anySizesAvailable &&
+                        <Form.Group>
+                            <Form.Label className="text-muted">Size:</Form.Label>
+                            <Form.Control as="select">
+                                {
+                                    product.sizesAvailable.map(entry => {
+                                        return <option>{ entry.size }</option>
+                                    })
+                                }
+                            </Form.Control>
+                        </Form.Group>
                 }
+                <hr style={{'margin': '0'}}/>
                 <Row className="justify-content-between px-3">
-                    { product.countInStock > 0
+                    { anySizesAvailable
                         ? <Button onClick={handleAddToBasket}>Add to cart</Button>
                         : <Button disabled>Unavailable</Button>
                     }
