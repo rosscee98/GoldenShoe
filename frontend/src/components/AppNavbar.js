@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, FormControl, Image, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Badge, Button, Form, FormControl, Image, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { BsBagFill, BsHeartFill } from 'react-icons/bs';
@@ -10,6 +10,7 @@ function AppNavbar(props) {
 
     const basket = useSelector(state => state.basket);
     const { basketItems } = basket;
+    const basketTotal = basketItems.reduce((acc, cur) => acc + (parseInt(cur['qty']) || 0), 0);
 
     return <Navbar expand="lg" className="round-edge mx-4 my-3">
         <LinkContainer to="/">
@@ -99,9 +100,10 @@ function AppNavbar(props) {
                 <Button variant="outline-primary">
                     <BsBagFill />
                     {" "}
-                    <span className="badge badge-light">
-                        { basketItems.reduce((acc, cur) => acc + (parseInt(cur['qty']) || 0), 0) }
-                    </span>
+                    <Badge variant="light">
+                        { basketTotal > 0 ? basketTotal : null }
+                    </Badge>
+                    <span class="sr-only">{ basketTotal > 0 ? "" : "Zero" } items in basket</span>
                 </Button>
             </LinkContainer>
         </span>

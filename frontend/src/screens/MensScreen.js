@@ -4,6 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { listProducts } from '../actions/productActions';
+import { AiOutlineHome } from 'react-icons/ai';
 
 function MensScreen(props) {
     const productList = useSelector(state => state.productList);
@@ -22,7 +23,10 @@ function MensScreen(props) {
     <Container className="content-container px-4 pt-0 pb-3" fluid>
         <Breadcrumb>
             <LinkContainer to="/">
-                <Breadcrumb.Item>Home</Breadcrumb.Item>
+                <Breadcrumb.Item>
+                    <AiOutlineHome />
+                </Breadcrumb.Item>
+                {/* <Breadcrumb.Item>Home</Breadcrumb.Item> */}
             </LinkContainer>
             <Breadcrumb.Item active="true">Mens</Breadcrumb.Item>
         </Breadcrumb>

@@ -5,6 +5,7 @@ import { Breadcrumb, Button, Container, Row, Spinner } from 'react-bootstrap';
 import { detailsProduct } from '../actions/productActions';
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
+import { AiOutlineHome } from 'react-icons/ai';
 
 function ProductScreen(props) {
     const productDetails = useSelector(state => state.productDetails);
@@ -27,7 +28,10 @@ function ProductScreen(props) {
     <Container className="content-container px-4 pt-0 pb-3" fluid>
         <Breadcrumb>
             <LinkContainer to="/">
-                <Breadcrumb.Item>Home</Breadcrumb.Item>
+                <Breadcrumb.Item>
+                    <AiOutlineHome />
+                </Breadcrumb.Item>
+                {/* <Breadcrumb.Item>Home</Breadcrumb.Item> */}
             </LinkContainer>
             <LinkContainer to={ "/" + product.category }>
                 <Breadcrumb.Item>{ product.category }</Breadcrumb.Item>

@@ -44,6 +44,10 @@ code {
   background-color: rgb(250, 229, 159);
 }
 
+.breadcrumb-item svg {
+  margin-bottom: 3px;
+}
+
 #logo {
   height: 35px;
   width: 35px;

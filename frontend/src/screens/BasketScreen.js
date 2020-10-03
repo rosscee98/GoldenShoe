@@ -67,7 +67,7 @@ function BasketScreen(props) {
                 </div>
                 <div className="basket-action">
                     <h3>Subtotal ({ basketItems.reduce((acc, cur) => acc + parseInt(cur.qty), 0) } items):
-                        £{ basketItems.reduce((acc, cur) => acc + cur.price * cur.qty, 0) }</h3>
+                        £{ basketItems.reduce((acc, cur) => acc + cur.price * cur.qty, 0).toFixed(2) }</h3>
                     <button onClick={ () => handleCheckout() } className="button primary w-100" disabled={ basketItems.length === 0 }>Proceed to checkout</button>
                 </div>
             </div>
