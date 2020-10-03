@@ -4,10 +4,10 @@ function basketReducer(state={ basketItems: [], shipping: {}, payment: {} }, act
     switch (action.type) {
         case BASKET_ADD_ITEM:
             const item = action.payload;
-            const product = state.basketItems.find(x => x.product === item.product);
+            const product = state.basketItems.find(x => (x.product === item.product) && (x.size === item.size));
             if (product) {
                 return { basketItems: state.basketItems.map(x =>
-                    x.product === product.product
+                    (x.product === item.product)
                         ? item
                         : x
                 )};

@@ -2,7 +2,7 @@ import Axios from "axios";
 import { BASKET_ADD_ITEM, BASKET_REMOVE_ITEM } from "../constants/basketConstants";
 import Cookie from "js-cookie";
 
-const addToBasket = (productId, qty) => async (dispatch, getState) => {
+const addToBasket = (productId, size, qty) => async (dispatch, getState) => {
     try {
         const { data } = await Axios.get('/api/products/' + productId); //TODO: test if this line is necessary?
         dispatch({ type: BASKET_ADD_ITEM, payload: {
@@ -11,7 +11,8 @@ const addToBasket = (productId, qty) => async (dispatch, getState) => {
             image: data.image,
             price: data.price,
             category: data.category,
-            countInStock: data.countInStock,
+            availableSizes: data.availableSizes,
+            size,
             qty,
         }});
         const { basket: { basketItems } } = getState();

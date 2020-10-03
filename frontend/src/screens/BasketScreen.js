@@ -21,7 +21,7 @@ function BasketScreen(props) {
 
     useEffect(() => {
         if (productId) {
-            dispatch(addToBasket(productId, 1));
+            dispatch(addToBasket(productId, 2, 1));
         };
     }, []);
 
@@ -48,8 +48,11 @@ function BasketScreen(props) {
                                                 <Link to={ "/product/" + item.product }>{ item.name }</Link>
                                             </div>
                                             <div>
+                                                <p className="text-muted">Size { item.size }</p>
+                                            </div>
+                                            <div>
                                                 Qty: 
-                                                <select value={ item.qty } onChange={ (e) => dispatch(addToBasket(item.product, e.target.value)) }>
+                                                <select value={ item.qty } onChange={ (e) => dispatch(addToBasket(item.product, item.size, e.target.value)) }>
                                                 {[...Array(item.countInStock).keys()].map(x => 
                                                     <option key={x+1} value={x+1}>{x+1}</option>
                                                 )}

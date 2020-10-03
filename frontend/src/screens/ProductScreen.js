@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Breadcrumb, Button, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
 import { detailsProduct } from '../actions/productActions';
+import { addToBasket } from '../actions/basketActions';
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 import { AiOutlineHome } from 'react-icons/ai';
@@ -11,15 +12,24 @@ function ProductScreen(props) {
     const productDetails = useSelector(state => state.productDetails);
     const {product, loading, error} = productDetails;
     const anySizesAvailable = product && (product.sizesAvailable && product.sizesAvailable.length);
+    const sizeSelection = useRef();
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(detailsProduct(props.match.params.id));
+        sizeSelection.current && sizeSelection.current.focus();
         return () => {}
-    }, [])
+    }, []);
 
-    const handleAddToBasket = () => {
-        props.history.push("/basket/" + props.match.params.id)
+    // useEffect(() => sizeSelection.current && sizeSelection.current.focus());
+
+    // const handleAddToBasket = () => {
+    //     props.history.push("/basket/" + props.match.params.id)
+    // }
+
+    const handleAddToBasket = (productId, size) => {
+        //dispatch(addToBasket(productId, size, 1));
+        dispatch(addToBasket(productId, size, 1));
     }
 
     return loading ? <Spinner className="mx-4" animation="border" role="status">
@@ -40,9 +50,7 @@ function ProductScreen(props) {
             <Breadcrumb.Item active="true">{ product.name }</Breadcrumb.Item>
         </Breadcrumb>
         <div id="productWindow" className="bg-dark-grey px-3 py-2 mt-0 round-edge-bottom">
-            {/* <Row> */}
             <div id="productImage" className="my-2 mr-2">
-                {/* 768 */}
                 <ImageGallery 
                     showFullscreenButton={false}
                     useBrowserFullscreen={false}
@@ -77,10 +85,10 @@ function ProductScreen(props) {
                     anySizesAvailable &&
                         <Form.Group>
                             <Form.Label className="text-muted">Size:</Form.Label>
-                            <Form.Control as="select">
+                            <Form.Control as="select" onChange={(e) => sizeSelection.current = e.target.value}>
                                 {
                                     product.sizesAvailable.map(entry => {
-                                        return <option>{ entry.size }</option>
+                                        return <option value={ entry.size }>{ entry.size }</option>
                                     })
                                 }
                             </Form.Control>
@@ -89,13 +97,12 @@ function ProductScreen(props) {
                 <hr style={{'margin': '0'}}/>
                 <Row className="justify-content-between px-3">
                     { anySizesAvailable
-                        ? <Button onClick={handleAddToBasket}>Add to cart</Button>
+                        ? <Button onClick={() => handleAddToBasket(product._id, parseInt(sizeSelection.current))}>Add to cart</Button>
                         : <Button disabled>Unavailable</Button>
                     }
                     <h3 className="text-muted">£{ product.price }</h3>
                 </Row>
             </div>
-            {/* </Row> */}
         </div>
     </Container>
 }
