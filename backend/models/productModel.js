@@ -23,6 +23,7 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    properties: [{type: String}],
     sizesAvailable: [{
         size: Number,
         countInStock: Number

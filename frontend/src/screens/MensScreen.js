@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react';
-import { Breadcrumb, Card, Container, Spinner } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Breadcrumb, Card, Container, Form, Spinner } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { listProducts } from '../actions/productActions';
+import { listProducts, listProductsInCategory } from '../actions/productActions';
 import { AiOutlineHome } from 'react-icons/ai';
 
 function MensScreen(props) {
     const productList = useSelector(state => state.productList);
     const { products, loading, error } = productList;
+    const [properties, setProperties] = useState([]);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(listProducts());
+        dispatch(listProductsInCategory("Mens"));
         return () => {}
     }, [])
 
@@ -31,6 +32,11 @@ function MensScreen(props) {
             <Breadcrumb.Item active="true">Mens</Breadcrumb.Item>
         </Breadcrumb>
         <div className="bg-dark-grey px-3 py-2 mt-0 round-edge-bottom">
+            {/* <Form>
+                <Form.Check label="Black" type="checkbox" id="black-checkbox" />
+                <Form.Check label="Blue" type="checkbox" id="blue-checkbox" />
+            </Form> */}
+            <p className="text-muted mb-0">{ products.length } products found</p>
             <ul className="products">
                 {
                     products.map(product => {
