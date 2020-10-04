@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { BASKET_ADD_ITEM, BASKET_INCREMENT_ITEM, BASKET_DECREMENT_ITEM, BASKET_REMOVE_ITEM } from "../constants/basketConstants";
+import { BASKET_ADD_ITEM, BASKET_INCREMENT_ITEM, BASKET_REMOVE_ITEM } from "../constants/basketConstants";
 import Cookie from "js-cookie";
 
 const addToBasket = (productId, size, countInStock, qty) => async (dispatch, getState) => {
@@ -43,19 +43,11 @@ const incrementInBasket = (productId, size, countInStock) => async (dispatch, ge
     }
 }
 
-const decrementInBasket = (productId, size, countInStock) => async (dispatch, getState) => {
+const removeFromBasket = (productId, size) => async (dispatch, getState) => {
     try {
-        const { data } = await Axios.get('/api/products/' + productId);
-        dispatch({ type: BASKET_DECREMENT_ITEM, payload: {
-            product: data._id,
-            name: data.name,
-            image: data.image,
-            price: data.price,
-            category: data.category,
-            availableSizes: data.availableSizes,
-            size,
-            countInStock
-        }});
+        dispatch({ type: BASKET_REMOVE_ITEM, payload:
+            {product: productId, size: size}
+        });
         const { basket: { basketItems } } = getState();
         Cookie.set("basketItems", JSON.stringify(basketItems));
     } catch (error) {
@@ -63,12 +55,4 @@ const decrementInBasket = (productId, size, countInStock) => async (dispatch, ge
     }
 }
 
-const removeFromBasket = (productId, qty) => async (dispatch, getState) => {
-    try {
-        dispatch({ type: BASKET_REMOVE_ITEM, payload: productId });
-    } catch (error) {
-        console.log(error.message);
-    }
-}
-
-export { addToBasket, incrementInBasket, decrementInBasket, removeFromBasket };
+export { addToBasket, incrementInBasket, removeFromBasket };

@@ -12,8 +12,8 @@ function BasketScreen(props) {
     const basket = useSelector(state => state.basket);
     const { basketItems } = basket;
 
-    const handleRemoveFromBasket = (productId) => {
-        dispatch(removeFromBasket(productId));
+    const handleRemoveFromBasket = (productId, size) => {
+        dispatch(removeFromBasket(productId, size));
     };
 
     const handleCheckout = () => {
@@ -51,15 +51,6 @@ function BasketScreen(props) {
                                             <div>
                                                 <p className="text-muted">Size { item.size }</p>
                                             </div>
-                                            {/* <div>
-                                                Qty: 
-                                                <select value={ item.qty } onChange={ (e) => dispatch(addToBasket(item.product, item.size, e.target.value)) }>
-                                                {[...Array(item.countInStock).keys()].map(x => 
-                                                    <option key={x+1} value={x+1}>{x+1}</option>
-                                                )}
-                                                </select>
-                                                <button type="button" className="button" onClick={ () => handleRemoveFromBasket(item.product) }>Delete</button>
-                                            </div> */}
                                             <div>
                                                 Qty:
                                                 <CounterInput
@@ -67,9 +58,8 @@ function BasketScreen(props) {
                                                     min={ 1 }
                                                     max={ Math.min(item.countInStock, 30) }
                                                     onCountChange={ count => dispatch(addToBasket(item.product, item.size, item.countInStock, count)) }
-                                                    //onCountChange={ count => console.log(count) }
                                                 />
-                                                <button type="button" className="button" onClick={ () => handleRemoveFromBasket(item.product) }>Delete</button>
+                                                <button type="button" className="button" onClick={ () => handleRemoveFromBasket(item.product, item.size) }>Delete</button>
                                             </div>
                                         </div>
                                         <div>
