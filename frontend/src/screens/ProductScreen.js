@@ -12,18 +12,18 @@ function ProductScreen(props) {
     const productDetails = useSelector(state => state.productDetails);
     const {product, loading, error} = productDetails;
     const anySizesAvailable = product && (product.sizesAvailable && product.sizesAvailable.length);
-    const sizeSelection = useRef();
+    const sizeSelectionWithCount = useRef();
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(detailsProduct(props.match.params.id));
-        sizeSelection.current && sizeSelection.current.focus();
+        sizeSelectionWithCount.current && sizeSelectionWithCount.current.focus();
         return () => {}
     }, []);
 
     useEffect(() => {
         if (anySizesAvailable) {
-            sizeSelection.current = product.sizesAvailable[0].size; 
+            sizeSelectionWithCount.current = `${ product.sizesAvailable[0].size },${ product.sizesAvailable[0].countInStock }`; 
         }
         return () => {}
     }, [anySizesAvailable]);
@@ -32,9 +32,9 @@ function ProductScreen(props) {
     //     props.history.push("/basket/" + props.match.params.id)
     // }
 
-    const handleAddToBasket = (productId, size) => {
-        //dispatch(addToBasket(productId, size, 1));
-        dispatch(addToBasket(productId, size, 1));
+    const handleAddToBasket = (productId, sizeAndCount) => {
+        var array = sizeAndCount.split(",");
+        dispatch(addToBasket(productId, parseInt(array[0]), parseInt(array[1]), 1));
     }
 
     return loading ? <Spinner className="mx-4" animation="border" role="status">
@@ -90,10 +90,10 @@ function ProductScreen(props) {
                     anySizesAvailable &&
                         <Form.Group>
                             <Form.Label className="text-muted">Size:</Form.Label>
-                            <Form.Control as="select" onChange={(e) => sizeSelection.current = e.target.value}>
+                            <Form.Control as="select" onChange={(e) => sizeSelectionWithCount.current = e.target.value}>
                                 {
                                     product.sizesAvailable.map(entry => {
-                                        return <option value={ entry.size }>{ entry.size }</option>
+                                        return <option key={ entry.size } value={ [entry.size, entry.countInStock] }>{ entry.size }</option>
                                     })
                                 }
                             </Form.Control>
@@ -102,7 +102,7 @@ function ProductScreen(props) {
                 <hr style={{'margin': '0'}}/>
                 <Row className="justify-content-between px-3">
                     { anySizesAvailable
-                        ? <Button onClick={() => handleAddToBasket(product._id, parseInt(sizeSelection.current))}>Add to cart</Button>
+                        ? <Button onClick={() => handleAddToBasket(product._id, sizeSelectionWithCount.current)}>Add to cart</Button>
                         : <Button disabled>Unavailable</Button>
                     }
                     <h3 className="text-muted">£{ product.price }</h3>

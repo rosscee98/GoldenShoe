@@ -51,7 +51,7 @@ function HomeScreen(props) {
         <hr className="d-none d-md-block"/>
         <div id="tagline">
             <h3>
-                Find your next <TextLoop interval="5000" mask="true">
+                Find your next <TextLoop interval="3000" mask="true">
                     <span>dancing</span>
                     <span>5-a-side</span>
                     <span>working late</span>

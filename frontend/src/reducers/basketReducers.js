@@ -7,7 +7,7 @@ function basketReducer(state={ basketItems: [], shipping: {}, payment: {} }, act
             const product = state.basketItems.find(x => (x.product === item.product) && (x.size === item.size));
             if (product) {
                 return { basketItems: state.basketItems.map(x =>
-                    (x.product === item.product)
+                    ((x.product === item.product) && (x.size === item.size))
                         ? item
                         : x
                 )};
