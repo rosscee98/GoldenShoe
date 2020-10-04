@@ -3,6 +3,7 @@ import { addToBasket, removeFromBasket } from '../actions/basketActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import CounterInput from "react-counter-input";
 
 function BasketScreen(props) {
     const productId = props.match.params.id;
@@ -50,13 +51,24 @@ function BasketScreen(props) {
                                             <div>
                                                 <p className="text-muted">Size { item.size }</p>
                                             </div>
-                                            <div>
+                                            {/* <div>
                                                 Qty: 
                                                 <select value={ item.qty } onChange={ (e) => dispatch(addToBasket(item.product, item.size, e.target.value)) }>
                                                 {[...Array(item.countInStock).keys()].map(x => 
                                                     <option key={x+1} value={x+1}>{x+1}</option>
                                                 )}
                                                 </select>
+                                                <button type="button" className="button" onClick={ () => handleRemoveFromBasket(item.product) }>Delete</button>
+                                            </div> */}
+                                            <div>
+                                                Qty:
+                                                <CounterInput
+                                                    count={ item.qty }
+                                                    min={ 1 }
+                                                    max={ Math.min(item.countInStock, 30) }
+                                                    onCountChange={ count => dispatch(addToBasket(item.product, item.size, item.countInStock, count)) }
+                                                    //onCountChange={ count => console.log(count) }
+                                                />
                                                 <button type="button" className="button" onClick={ () => handleRemoveFromBasket(item.product) }>Delete</button>
                                             </div>
                                         </div>

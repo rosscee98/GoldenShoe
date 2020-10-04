@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Breadcrumb, Button, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
 import { detailsProduct } from '../actions/productActions';
-import { addToBasket } from '../actions/basketActions';
+import { addOneToBasket, incrementInBasket } from '../actions/basketActions';
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 import { AiOutlineHome } from 'react-icons/ai';
@@ -34,7 +34,7 @@ function ProductScreen(props) {
 
     const handleAddToBasket = (productId, sizeAndCount) => {
         var array = sizeAndCount.split(",");
-        dispatch(addToBasket(productId, parseInt(array[0]), parseInt(array[1]), 1));
+        dispatch(incrementInBasket(productId, parseInt(array[0]), parseInt(array[1])));
     }
 
     return loading ? <Spinner className="mx-4" animation="border" role="status">
