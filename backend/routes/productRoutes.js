@@ -3,15 +3,15 @@ import Product from '../models/productModel';
 
 const router = express.Router();
 
-/* Create */ // note here the isAuth isAdmin arguments passed in on the practice app - implement that!
+/* Create */
 router.post("/", async (req, res) => {
     const product = new Product({
         name: req.body.name,
         image: req.body.image,
         price: req.body.price,
         category: req.body.category,
-        //countInStock: req.body.countInStock,
         description: req.body.description,
+        properties: req.body.properties,
         sizesAvailable: req.body.sizesAvailable
     });
     const newProduct = await product.save();
@@ -39,7 +39,7 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-/* Update */ // same here
+/* Update */
 router.put("/:id", async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
@@ -48,9 +48,9 @@ router.put("/:id", async (req, res) => {
         product.image = req.body.image;
         product.price = req.body.price;
         product.category = req.body.category;
-        //product.countInStock = req.body.countInStock;
-        product.sizesAvailable = req.body.sizesAvailable;
         product.description = req.body.description;
+        product.properties = req.body.properties;
+        product.sizesAvailable = req.body.sizesAvailable;
         const updatedProduct = await product.save().catch(error => {
             console.log(error.message);
         });
@@ -61,7 +61,7 @@ router.put("/:id", async (req, res) => {
     return res.status(500).send({message: "Error in updating product"});
 });
 
-/* Delete */ // same here
+/* Delete */
 router.delete("/:id", async (req, res) => {
     const deletedProduct = await Product.findById(req.params.id);
     if (deletedProduct) {
