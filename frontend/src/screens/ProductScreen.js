@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Breadcrumb, Button, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
+import { Breadcrumb, Button, Container, Form, Row, Spinner, Alert } from 'react-bootstrap';
 import { detailsProduct } from '../actions/productActions';
 import { addOneToBasket, incrementInBasket } from '../actions/basketActions';
 import ImageGallery from 'react-image-gallery';
@@ -13,6 +13,7 @@ function ProductScreen(props) {
     const {product, loading, error} = productDetails;
     const anySizesAvailable = product && (product.sizesAvailable && product.sizesAvailable.length);
     const sizeSelectionWithCount = useRef();
+    const [showAlert, setShowAlert] = useState(false);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -35,6 +36,7 @@ function ProductScreen(props) {
     const handleAddToBasket = (productId, sizeAndCount) => {
         var array = sizeAndCount.split(",");
         dispatch(incrementInBasket(productId, parseInt(array[0]), parseInt(array[1])));
+        setShowAlert(true);
     }
 
     return loading ? <Spinner className="mx-4" animation="border" role="status">
@@ -87,8 +89,14 @@ function ProductScreen(props) {
                         : <div></div>
                 } */}
                 {
-                    anySizesAvailable &&
-                        <Form.Group>
+                    showAlert && 
+                        <Alert className="mt-3 mb-0" variant="success" onClose={() => setShowAlert(false)} dismissible>
+                            Added to basket!
+                        </Alert>
+                }
+                {
+                    anySizesAvailable
+                        ? <Form.Group className="mt-2">
                             <Form.Label className="text-muted">Size:</Form.Label>
                             <Form.Control as="select" onChange={(e) => sizeSelectionWithCount.current = e.target.value}>
                                 {
@@ -98,8 +106,8 @@ function ProductScreen(props) {
                                 }
                             </Form.Control>
                         </Form.Group>
+                        : <div></div>
                 }
-                <hr style={{'margin': '0'}}/>
                 <Row className="justify-content-between px-3">
                     { anySizesAvailable
                         ? <Button onClick={() => handleAddToBasket(product._id, sizeSelectionWithCount.current)}>Add to cart</Button>
