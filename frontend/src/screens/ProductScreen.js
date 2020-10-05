@@ -3,22 +3,24 @@ import { useSelector, useDispatch } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Breadcrumb, Button, Container, Form, Row, Spinner, Alert } from 'react-bootstrap';
 import { detailsProduct } from '../actions/productActions';
-import { addToFavourites, removeFromFavourites, toggleFavourites } from '../actions/favouriteActions';
-import { addOneToBasket, incrementInBasket } from '../actions/basketActions';
+import { addToFavourites, removeFromFavourites } from '../actions/favouriteActions';
+import { incrementInBasket } from '../actions/basketActions';
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 import { AiOutlineHome } from 'react-icons/ai';
-import { FaHeart } from 'react-icons/fa';
+import { RiHeartAddFill } from 'react-icons/ri';
+import { IoMdHeartDislike } from 'react-icons/io';
 
 function ProductScreen(props) {
     const productDetails = useSelector(state => state.productDetails);
     const {product, loading, error} = productDetails;
     const anySizesAvailable = product && (product.sizesAvailable && product.sizesAvailable.length);
     const sizeSelectionWithCount = useRef();
-    const [showAlert, setShowAlert] = useState(false);
+    const [showBasketAlert, setShowBasketAlert] = useState(false);
 
     const favourites = useSelector(state => state.favourites);
     const { favouriteItems } = favourites;
+    const currentlyFavourited = favouriteItems.find(x => x.product === props.match.params.id);
 
     const dispatch = useDispatch();
 
@@ -35,19 +37,14 @@ function ProductScreen(props) {
         return () => {}
     }, [anySizesAvailable]);
 
-    // const handleAddToBasket = () => {
-    //     props.history.push("/basket/" + props.match.params.id)
-    // }
-
     const handleAddToBasket = (productId, sizeAndCount) => {
         var array = sizeAndCount.split(",");
         dispatch(incrementInBasket(productId, parseInt(array[0]), parseInt(array[1])));
-        setShowAlert(true);
+        setShowBasketAlert(true);
     }
 
     const handleToggleFavourite = (productId) => {
-        var alreadyFavourited = favouriteItems.find(x => x.product === productId);
-        (alreadyFavourited)
+        (currentlyFavourited)
             ? dispatch(removeFromFavourites(productId))
             : dispatch(addToFavourites(productId));
     }
@@ -101,8 +98,8 @@ function ProductScreen(props) {
                         : <div></div>
                 } */}
                 {
-                    showAlert && 
-                        <Alert className="mt-3 mb-0" variant="success" onClose={() => setShowAlert(false)} dismissible>
+                    showBasketAlert && 
+                        <Alert className="mt-3 mb-0" variant="success" onClose={() => setShowBasketAlert(false)} dismissible>
                             Added to basket!
                         </Alert>
                 }
@@ -125,12 +122,23 @@ function ProductScreen(props) {
                         ? <Button onClick={ () => handleAddToBasket(product._id, sizeSelectionWithCount.current) }>Add to cart</Button>
                         : <Button disabled>Unavailable</Button>
                     }
-                    <Button
-                        variant="outline-danger ml-2"
-                        onClick={ () => handleToggleFavourite(product._id) }
-                    >
-                        <FaHeart />
-                    </Button>
+                    {
+                        currentlyFavourited
+                            ? <Button
+                                variant="outline-danger ml-2"
+                                onClick={ () => handleToggleFavourite(product._id) }
+                                active
+                            >
+                                <IoMdHeartDislike />
+                            </Button>
+                            : <Button
+                                variant="outline-danger ml-2"
+                                onClick={ () => handleToggleFavourite(product._id) }
+                            >
+                                <RiHeartAddFill />
+                            </Button>
+                            
+                    }
                     <h3 className="text-muted ml-auto">£{ product.price }</h3>
                 </Row>
             </div>
