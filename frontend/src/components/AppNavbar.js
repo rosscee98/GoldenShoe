@@ -1,8 +1,8 @@
 import React from 'react';
-import { Badge, Button, Form, FormControl, Image, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Badge, Button, Form, FormControl, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
-import { BsBagFill, BsHeartFill } from 'react-icons/bs';
+import { BsBagFill } from 'react-icons/bs';
 import { FaHeart } from 'react-icons/fa';
 import { GiRunningShoe } from 'react-icons/gi';
 

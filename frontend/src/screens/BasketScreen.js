@@ -24,7 +24,7 @@ function BasketScreen(props) {
         if (productId) {
             dispatch(addToBasket(productId, 2, 1));
         };
-    }, []);
+    }, [dispatch, productId]);
 
     //228,231,235
     return <Container className="content-container px-4 pt-0 pb-3" fluid>

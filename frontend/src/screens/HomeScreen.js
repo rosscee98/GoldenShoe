@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Carousel, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import TextLoop from 'react-text-loop';

@@ -20,8 +20,7 @@ function App() {
         <Route path="/" exact component={HomeScreen} />
         <Route path="/mens" component={MensScreen} />
         <Route path="/product/:id" component={ProductScreen} />
-        <Route path="/basket/" component={BasketScreen} />  {/* TODO: why is it necessary to route to /basket/ and /basket/:id just to get to BasketScreen from /basket/? */}
-        {/* <Route path="/basket/:id" component={BasketScreen} /> */}
+        <Route path="/basket" component={BasketScreen} />
         <Route path="/favourites" component={FavouritesScreen} />
         <AppFooter />
       </div>

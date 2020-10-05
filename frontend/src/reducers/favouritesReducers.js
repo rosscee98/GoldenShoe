@@ -6,7 +6,6 @@ function favouritesReducer(state={ favouriteItems: [] }, action) {
             var item = action.payload;
             return { favouriteItems: [...state.favouriteItems, item] }
         case FAVOURITES_REMOVE_ITEM:
-            console.log("got to remove_item reducer!");
             return { favouriteItems: state.favouriteItems.filter(x => x.product !== action.payload.product) }
         default:
             return state;

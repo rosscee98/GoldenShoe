@@ -28,14 +28,14 @@ function ProductScreen(props) {
         dispatch(detailsProduct(props.match.params.id));
         sizeSelectionWithCount.current && sizeSelectionWithCount.current.focus();
         return () => {}
-    }, []);
+    }, [dispatch, props.match.params.id]);
 
     useEffect(() => {
         if (anySizesAvailable) {
             sizeSelectionWithCount.current = `${ product.sizesAvailable[0].size },${ product.sizesAvailable[0].countInStock }`; 
         }
         return () => {}
-    }, [anySizesAvailable]);
+    }, [anySizesAvailable, product]);
 
     const handleAddToBasket = (productId, sizeAndCount) => {
         var array = sizeAndCount.split(",");
