@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Breadcrumb, Button, Container, Form, Row, Spinner, Alert } from 'react-bootstrap';
 import { detailsProduct } from '../actions/productActions';
+import { addToFavourites, removeFromFavourites, toggleFavourites } from '../actions/favouriteActions';
 import { addOneToBasket, incrementInBasket } from '../actions/basketActions';
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 import { AiOutlineHome } from 'react-icons/ai';
+import { FaHeart } from 'react-icons/fa';
 
 function ProductScreen(props) {
     const productDetails = useSelector(state => state.productDetails);
@@ -14,6 +16,10 @@ function ProductScreen(props) {
     const anySizesAvailable = product && (product.sizesAvailable && product.sizesAvailable.length);
     const sizeSelectionWithCount = useRef();
     const [showAlert, setShowAlert] = useState(false);
+
+    const favourites = useSelector(state => state.favourites);
+    const { favouriteItems } = favourites;
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -39,6 +45,13 @@ function ProductScreen(props) {
         setShowAlert(true);
     }
 
+    const handleToggleFavourite = (productId) => {
+        var alreadyFavourited = favouriteItems.find(x => x.product === productId);
+        (alreadyFavourited)
+            ? dispatch(removeFromFavourites(productId))
+            : dispatch(addToFavourites(productId));
+    }
+
     return loading ? <Spinner className="mx-4" animation="border" role="status">
         <span className="sr-only">Loading...</span>
     </Spinner> :
@@ -49,7 +62,6 @@ function ProductScreen(props) {
                 <Breadcrumb.Item>
                     <AiOutlineHome />
                 </Breadcrumb.Item>
-                {/* <Breadcrumb.Item>Home</Breadcrumb.Item> */}
             </LinkContainer>
             <LinkContainer to={ "/" + product.category }>
                 <Breadcrumb.Item>{ product.category }</Breadcrumb.Item>
@@ -110,10 +122,16 @@ function ProductScreen(props) {
                 }
                 <Row className="justify-content-between px-3">
                     { anySizesAvailable
-                        ? <Button onClick={() => handleAddToBasket(product._id, sizeSelectionWithCount.current)}>Add to cart</Button>
+                        ? <Button onClick={ () => handleAddToBasket(product._id, sizeSelectionWithCount.current) }>Add to cart</Button>
                         : <Button disabled>Unavailable</Button>
                     }
-                    <h3 className="text-muted">£{ product.price }</h3>
+                    <Button
+                        variant="outline-danger ml-2"
+                        onClick={ () => handleToggleFavourite(product._id) }
+                    >
+                        <FaHeart />
+                    </Button>
+                    <h3 className="text-muted ml-auto">£{ product.price }</h3>
                 </Row>
             </div>
         </div>

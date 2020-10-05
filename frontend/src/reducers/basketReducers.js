@@ -1,6 +1,6 @@
 import { BASKET_ADD_ITEM, BASKET_INCREMENT_ITEM, BASKET_REMOVE_ITEM } from "../constants/basketConstants";
 
-function basketReducer(state={ basketItems: [], shipping: {}, payment: {} }, action) {
+function basketReducer(state={ basketItems: [] }, action) {
     switch (action.type) {
         case BASKET_ADD_ITEM:
             var item = action.payload;

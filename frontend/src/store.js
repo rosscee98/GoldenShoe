@@ -3,15 +3,18 @@ import { productListReducer, productDetailsReducer } from "./reducers/productRed
 import thunk from 'redux-thunk';
 import Cookie from 'js-cookie';
 import { basketReducer } from "./reducers/basketReducers";
+import { favouritesReducer } from "./reducers/favouritesReducers";
 
 const reducer = combineReducers({
     productList: productListReducer,
     productDetails: productDetailsReducer,
-    basket: basketReducer
+    basket: basketReducer,
+    favourites: favouritesReducer,
 });
 
 const basketItems = Cookie.getJSON("basketItems") || [];
-const initialState = { basket: { basketItems } };
+const favouriteItems = Cookie.getJSON("favouriteItems") || [];
+const initialState = { basket: { basketItems }, favourites: { favouriteItems } };
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, initialState, composeEnhancer(applyMiddleware(thunk)));

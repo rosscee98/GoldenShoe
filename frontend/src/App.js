@@ -10,6 +10,7 @@ import MensScreen from './screens/MensScreen';
 import AppNavbar from './components/AppNavbar';
 import AppFooter from './components/AppFooter';
 import BasketScreen from './screens/BasketScreen';
+import FavouritesScreen from './screens/FavouritesScreen';
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
         <Route path="/mens" component={MensScreen} />
         <Route path="/product/:id" component={ProductScreen} />
         <Route path="/basket/" component={BasketScreen} />  {/* TODO: why is it necessary to route to /basket/ and /basket/:id just to get to BasketScreen from /basket/? */}
-        <Route path="/basket/:id" component={BasketScreen} />
+        {/* <Route path="/basket/:id" component={BasketScreen} /> */}
+        <Route path="/favourites" component={FavouritesScreen} />
         <AppFooter />
       </div>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
