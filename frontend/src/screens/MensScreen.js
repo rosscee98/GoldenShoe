@@ -62,7 +62,7 @@ function MensScreen(props) {
                                 type="checkbox"
                                 value={ colour }
                                 onChange={ e => handlePropertyChange(e.target.checked, colour) }
-                                defaultChecked={ e => (!properties.indexOf(colour === -1)) }
+                                defaultChecked={ e => properties.indexOf(colour !== -1) }
                             />
                         ))
                     }
