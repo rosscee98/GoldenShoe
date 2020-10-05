@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { Breadcrumb, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
+import { Breadcrumb, Col, Container, Form, Row, Spinner, Tooltip } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { listFilteredProducts, listProductsInCategory } from '../actions/productActions';
 import { AiOutlineHome } from 'react-icons/ai';
 import ProductList from '../components/ProductList';
+import Slider, { Range } from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 function MensScreen(props) {
     const productList = useSelector(state => state.productList);
     const { products, loading, error } = productList;
-    const [properties, setProperties] = useState([]);
-    const [size, setSize] = useState(null);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const dispatch = useDispatch();
+
+    const [properties, setProperties] = useState([]);
+    const [size, setSize] = useState(null);
+    const [priceRange, setPriceRange] = useState([0, 200]);
+
+    const createSliderWithTooltip = Slider.createSliderWithTooltip;
+    const Range = createSliderWithTooltip(Slider.Range);
 
     const sizeFilter = (arr) => size
         ? arr.filter(product => product.sizesAvailable.find(entry => entry.size === size))
@@ -20,6 +27,9 @@ function MensScreen(props) {
     const propertyFilter = (arr) => (properties.length > 0)
         ? arr.filter(product => (properties.every(p => product.properties.indexOf(p) !== -1)))
         : arr;
+    const costFilter = (arr) => arr.filter(product => 
+        (product.price >= priceRange[0]) && (product.price <= priceRange[1]) 
+    );
 
     useEffect(() => {
         dispatch(listProductsInCategory("Mens"));
@@ -35,15 +45,14 @@ function MensScreen(props) {
     //*********************//
 
     useEffect(() => {
-        // const sizeFilter = (arr) => size
-        //     ? arr.filter(product => product.sizesAvailable.find(entry => entry.size === size))
-        //     : arr;
-        // const propertyFilter = (arr) => (properties.length > 0)
-        //     ? arr.filter(product => (properties.every(p => product.properties.indexOf(p) !== -1)))
-        //     : arr;
-        setFilteredProducts(sizeFilter(propertyFilter(products)));
+        setFilteredProducts(costFilter(sizeFilter(propertyFilter(products))));
         return () => {}
-    }, [properties, size]);
+    }, [properties, size, priceRange]);
+
+    useEffect(() => {
+        console.log(priceRange);
+        return () => {}
+    }, [priceRange])
 
     const handlePropertyChange = (isChecked, value) => {
         isChecked
@@ -56,6 +65,10 @@ function MensScreen(props) {
             setSize(value);
         }
     };
+
+    const handlePriceChange = (range) => {
+        setPriceRange(range);
+    }
 
     return <Container className="content-container px-4 pt-0 pb-3" fluid>
         <Breadcrumb>
@@ -107,6 +120,18 @@ function MensScreen(props) {
                 </Form>
                 <hr />
                 <h4 className="text-muted">Price</h4>
+                {/* <Form id="rangeInput">
+                    
+                </Form> */}
+                <Range 
+                    min={ 0 }
+                    max={ 200 }
+                    defaultValue={ priceRange }
+                    pushable={ true }
+                    step={ 10 }
+                    tipFormatter={ value => `£${value}` }
+                    onAfterChange={ handlePriceChange }
+                />
                 <Form>
                     {
                         ["Under £50", "£50-75", "£75-£100", "£100-125", "£125-150", "Over £150"].map(price => (
