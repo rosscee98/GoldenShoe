@@ -36,7 +36,11 @@ function ProductList(props) {
                     .sort(sorters[sort])
                     .map(product => {
                     return <li key={product._id}>
-                        <Card className="product">
+                        {
+                            (product.sizesAvailable.length === 0) &&
+                                <h4 id="soldOutTag" className="rounded d-flex">Sold out</h4>
+                        }
+                        <Card className="product">  {/* style={product.sizesAvailable.length === 0 ? {'transform': 'translateY(-20px)'} : null} */}
                             <Link to={ "/product/" + product._id }>
                                 <Card.Img variant="top" src={ product.image } />
                             </Link>

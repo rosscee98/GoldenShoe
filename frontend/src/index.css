@@ -194,6 +194,7 @@ hr {
 .products li {
   flex: 0 1 18rem;
   margin: 1rem;
+  /* margin: 0 1rem 1rem 1rem; */
   list-style-type: none;
 }
 
@@ -201,6 +202,14 @@ hr {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+#soldOutTag {
+  color: white;
+  background-color: darkred;  /* red */
+  position: absolute;
+  z-index: 2;
+  padding: .2rem;
 }
 
 /* ProductScreen.js */
