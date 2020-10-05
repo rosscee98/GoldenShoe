@@ -73,8 +73,7 @@ function MensScreen(props) {
             <Breadcrumb.Item active="true">Mens</Breadcrumb.Item>
         </Breadcrumb>
         <Row className="round-edge-bottom m-0">
-            {/* on md and smaller screen, both bottom radius: 1rem, margin-bottom: 2rem; on lg and up, bottom left radius: 1rem */}
-            <Col id="filterContainer" className="bg-light-grey pt-2" md={3}>  {/*style={{'borderBottomLeftRadius': '1rem'}}*/}
+            <Col id="filterContainer" className="bg-light-grey pt-2" md={3}>
                 <h3>Filters</h3>
                 <h4 className="text-muted">Colour</h4>
                 <Form>
@@ -86,7 +85,8 @@ function MensScreen(props) {
                                 type="checkbox"
                                 value={ colour }
                                 onChange={ e => handlePropertyChange(e.target.checked, colour) }
-                                defaultChecked={ e => properties.indexOf(colour !== -1) }
+                                //defaultChecked={ e => properties.indexOf(colour !== -1) }
+                                defaultChecked={ false }
                             />
                         ))
                     }
@@ -103,7 +103,7 @@ function MensScreen(props) {
                                 type="radio"
                                 value={ i+1 }
                                 onChange={ e => handleSizeChange(e.target.checked, i+1) }
-                                defaultChecked={ e => properties.indexOf((i+1) !== -1) }
+                                defaultChecked={ false }
                             />
                         ))
                     }
@@ -123,8 +123,7 @@ function MensScreen(props) {
                     />
                 </div>
             </Col>
-            {/* on md and down, all border radius: 1rem. on lg and up, bottom right radius: 1rem */}
-            <Col id="productContainer" className="bg-dark-grey px-3 py-2 mt-0" md={9}> {/*style={{'borderBottomRightRadius': '1rem'}}*/}
+            <Col id="productContainer" className="bg-dark-grey px-3 py-2 mt-0" md={9}>
                 {
                     loading
                         ? <Spinner className="mx-4" animation="border" role="status">

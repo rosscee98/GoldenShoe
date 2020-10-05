@@ -93,7 +93,7 @@ function AppNavbar(props) {
                 <Button variant="outline-danger">
                     <FaHeart />
                     {" "}
-                    <Badge variant="light">
+                    <Badge>
                         { favouritesTotal > 0 ? favouritesTotal : null }
                     </Badge>
                     <span className="sr-only">{ favouritesTotal > 0 ? "" : "Zero" } items in favourites</span>
@@ -103,7 +103,7 @@ function AppNavbar(props) {
                 <Button variant="outline-primary">
                     <BsBagFill />
                     {" "}
-                    <Badge variant="light">
+                    <Badge>
                         { basketTotal > 0 ? basketTotal : null }
                     </Badge>
                     <span className="sr-only">{ basketTotal > 0 ? "" : "Zero" } items in basket</span>

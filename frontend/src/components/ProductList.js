@@ -1,13 +1,40 @@
-import React from 'react';
-import { Card } from 'react-bootstrap';
+import React, { useEffect, useRef, useState } from 'react';
+import { Card, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function ProductList(props) {
+
+    const mostRecentSorter = (a,b) => (a._id < b._id) ? 1 : -1;
+    const lowToHighPriceSorter = (a,b) => (a.price > b.price) ? 1 : -1;
+    const highToLowPriceSorter = (a,b) => (a.price < b.price) ? 1 : -1;
+    const atozSorter = (a,b) => (a.name > b.name) ? 1 : -1;
+    const ztoaSorter = (a,b) => (a.name < b.name) ? 1 : -1;
+    const sorters = [mostRecentSorter, lowToHighPriceSorter, highToLowPriceSorter, atozSorter, ztoaSorter];
+    const [sort, setSort] = useState(0);
+
     return <div>
-        <p className="text-muted mb-0">{ props.products.length } products found</p>
+        <div style={{'display': 'flex'}}>
+            <p className="text-muted mb-0 mr-auto">{ props.products.length } products found</p>
+            {/* <p>Sort by: </p> */}
+            <Form inline style={{'align-items': 'flex-start'}}>
+                <Form.Label className="text-muted mr-1">Sort by:</Form.Label>
+                <Form.Control
+                    as="select"
+                    onChange={(e) => setSort(e.target.value)}
+                >
+                    <option key={0} value={0}>Most recent</option>
+                    <option key={1} value={1}>Price: low to high</option>
+                    <option key={2} value={2}>Price: high to low</option>
+                    <option key={3} value={3}>A-Z</option>
+                    <option key={4} value={4}>Z-A</option>
+                </Form.Control>
+            </Form>
+        </div>
         <ul className="products">
             {
-                props.products.map(product => {
+                props.products
+                    .sort(sorters[sort])
+                    .map(product => {
                     return <li key={product._id}>
                         <Card className="product">
                             <Link to={ "/product/" + product._id }>

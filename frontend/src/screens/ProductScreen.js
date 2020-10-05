@@ -109,9 +109,11 @@ function ProductScreen(props) {
                             <Form.Label className="text-muted">Size:</Form.Label>
                             <Form.Control as="select" onChange={(e) => sizeSelectionWithCount.current = e.target.value}>
                                 {
-                                    product.sizesAvailable.map(entry => {
-                                        return <option key={ entry.size } value={ [entry.size, entry.countInStock] }>{ entry.size }</option>
-                                    })
+                                    product.sizesAvailable
+                                        .sort((a,b) => (a.size > b.size) ? 1 : -1)
+                                        .map(entry => {
+                                            return <option key={ entry.size } value={ [entry.size, entry.countInStock] }>{ entry.size }</option>
+                                        })
                                 }
                             </Form.Control>
                         </Form.Group>
