@@ -10,25 +10,33 @@ function MensScreen(props) {
     const productList = useSelector(state => state.productList);
     const { products, loading, error } = productList;
     const [properties, setProperties] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
     const dispatch = useDispatch();
-    console.log(properties);
 
     useEffect(() => {
-        console.log(properties);
         dispatch(listProductsInCategory("Mens"));
         return () => {}
-    }, [dispatch])
+    }, [dispatch]);
 
     useEffect(() => {
-        dispatch(listFilteredProducts(properties, "Mens"));
-        console.log(properties);
+        setProperties([]);
+        setFilteredProducts(products);
         return () => {}
-    }, [properties, dispatch])
+    }, [products]);
 
-    const handlePropertyChange = (selected, value) => {
-        console.log(properties);
-        console.log(selected, value);
-        selected
+    //*********************//
+
+    useEffect(() => {
+        properties.length === 0
+            ? setFilteredProducts(products)
+            : setFilteredProducts(products.filter(product => (
+                properties.every(p => product.properties.indexOf(p) !== -1)
+            )));
+        return () => {}
+    }, [properties])
+
+    const handlePropertyChange = (isChecked, value) => {
+        isChecked
             ? setProperties(properties => [...properties, value])
             : setProperties(properties => properties.filter(p => p !== value));
     }
@@ -51,9 +59,6 @@ function MensScreen(props) {
                 <h3>Filters</h3>
                 <h4 className="text-muted">Colour</h4>
                 <Form>
-                    {
-                        console.log(properties.indexOf("Black"))
-                    }
                     {
                         ["Black", "Blue", "Red", "Yellow", "Green"].map(colour => (
                             <Form.Check
@@ -100,8 +105,6 @@ function MensScreen(props) {
                     }
                 </Form>
             </Col>
-            {/* </div> */}
-            {/* <div className="bg-dark-grey px-3 py-2 mt-0"> */}
             <Col className="bg-dark-grey px-3 py-2 mt-0" sm={9} style={{'borderBottomRightRadius': '1rem'}}>
                 {
                     loading
@@ -110,7 +113,7 @@ function MensScreen(props) {
                         </Spinner>
                         : error
                             ? <h3 className="mx-4">{error}</h3> 
-                            : <ProductList products={ products } />
+                            : <ProductList products={ filteredProducts } />
                 }
             </Col>
             {/* </div> */}
