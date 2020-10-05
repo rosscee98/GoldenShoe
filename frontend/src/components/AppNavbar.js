@@ -19,12 +19,6 @@ function AppNavbar(props) {
     return <Navbar expand="lg" className="round-edge mx-4 my-3">
         <LinkContainer to="/">
             <Navbar.Brand>
-                {/* <Image
-                    src="/images/logo192.png"
-                    width="35"
-                    height="35"
-                    alt="Golden Shoe"
-                />{' '} */}
                 <GiRunningShoe id="logo" />
                 Golden Shoe
             </Navbar.Brand>

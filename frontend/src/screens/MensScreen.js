@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Breadcrumb, Col, Container, Form, Row, Spinner, Tooltip } from 'react-bootstrap';
+import { Breadcrumb, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { listFilteredProducts, listProductsInCategory } from '../actions/productActions';
+import { listProductsInCategory } from '../actions/productActions';
 import { AiOutlineHome } from 'react-icons/ai';
 import ProductList from '../components/ProductList';
-import Slider, { Range } from 'rc-slider';
+import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 function MensScreen(props) {
@@ -42,17 +42,10 @@ function MensScreen(props) {
         return () => {}
     }, [products]);
 
-    //*********************//
-
     useEffect(() => {
         setFilteredProducts(costFilter(sizeFilter(propertyFilter(products))));
         return () => {}
     }, [properties, size, priceRange]);
-
-    useEffect(() => {
-        console.log(priceRange);
-        return () => {}
-    }, [priceRange])
 
     const handlePropertyChange = (isChecked, value) => {
         isChecked
@@ -79,12 +72,9 @@ function MensScreen(props) {
             </LinkContainer>
             <Breadcrumb.Item active="true">Mens</Breadcrumb.Item>
         </Breadcrumb>
-        {/* <div className="round-edge-bottom" style={{'display': 'flex', 'flex-wrap': 'wrap'}}> */}
-        {/* <div className="round-edge-bottom"> */}
         <Row className="round-edge-bottom m-0">
-            {/* <div className="bg-light-grey" style={{'border-top': '.1rem solid lightgrey', 'border-right': '.1rem solid lightgrey', 'flex': '1 1 20rem'}}> */}
-            {/* <div className="bg-light-grey"> */}
-            <Col className="bg-light-grey" sm={3} style={{'borderBottomLeftRadius': '1rem'}}>
+            {/* on md and smaller screen, both bottom radius: 1rem, margin-bottom: 2rem; on lg and up, bottom left radius: 1rem */}
+            <Col id="filterContainer" className="bg-light-grey pt-2" md={3}>  {/*style={{'borderBottomLeftRadius': '1rem'}}*/}
                 <h3>Filters</h3>
                 <h4 className="text-muted">Colour</h4>
                 <Form>
@@ -101,7 +91,7 @@ function MensScreen(props) {
                         ))
                     }
                 </Form>
-                <hr />
+                <hr className="py-1" />
                 <h4 className="text-muted">Size</h4>
                 <Form>
                     {
@@ -118,36 +108,23 @@ function MensScreen(props) {
                         ))
                     }
                 </Form>
-                <hr />
+                <hr className="py-1" />
                 <h4 className="text-muted">Price</h4>
-                {/* <Form id="rangeInput">
-                    
-                </Form> */}
-                <Range 
-                    min={ 0 }
-                    max={ 200 }
-                    defaultValue={ priceRange }
-                    pushable={ true }
-                    step={ 10 }
-                    tipFormatter={ value => `£${value}` }
-                    onAfterChange={ handlePriceChange }
-                />
-                <Form>
-                    {
-                        ["Under £50", "£50-75", "£75-£100", "£100-125", "£125-150", "Over £150"].map(price => (
-                            <Form.Check
-                                key={ price }
-                                label={ price }
-                                type="checkbox"
-                                value={ price }
-                                onChange={ e => handlePropertyChange(e.target.checked, price) }
-                                defaultChecked={ e => properties.indexOf(price !== -1) }
-                            />
-                        ))
-                    }
-                </Form>
+                <p>£10 - £200</p>
+                <div className="mb-4 px-2">
+                    <Range 
+                        min={ 10 }
+                        max={ 200 }
+                        defaultValue={ priceRange }
+                        pushable={ true }
+                        step={ 10 }
+                        tipFormatter={ value => `£${value}` }
+                        onAfterChange={ handlePriceChange }
+                    />
+                </div>
             </Col>
-            <Col className="bg-dark-grey px-3 py-2 mt-0" sm={9} style={{'borderBottomRightRadius': '1rem'}}>
+            {/* on md and down, all border radius: 1rem. on lg and up, bottom right radius: 1rem */}
+            <Col id="productContainer" className="bg-dark-grey px-3 py-2 mt-0" md={9}> {/*style={{'borderBottomRightRadius': '1rem'}}*/}
                 {
                     loading
                         ? <Spinner className="mx-4" animation="border" role="status">
@@ -158,9 +135,7 @@ function MensScreen(props) {
                             : <ProductList products={ filteredProducts } />
                 }
             </Col>
-            {/* </div> */}
         </Row>
-        {/* </div> */}
     </Container>
 }
 

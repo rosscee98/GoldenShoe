@@ -24,25 +24,6 @@ const listProductsInCategory = (category) => async (dispatch) => {
     } 
 }
 
-const listFilteredProducts = (properties, category) => async (dispatch) => {
-    try {
-        properties = properties.map(p => p.toLowerCase());
-        dispatch({ type: PRODUCT_LIST_REQUEST });
-        const { data } = await axios.get("/api/products");
-        dispatch({
-            type: PRODUCT_LIST_SUCCESS,
-            payload: (properties.length === 0)
-            ? data.filter(product => product.category.toLowerCase() === category.toLowerCase())
-            : data.filter(product => 
-                (product.category.toLowerCase() === category.toLowerCase()) &&
-                !(product.properties.every(property => properties.indexOf(property.toLowerCase()) === -1)))
-            // this one returns an item if it meets any of the properties - needs to be if it's ALL the properties!
-        });
-    } catch (error) {
-        dispatch({ type: PRODUCT_LIST_FAILURE, payload: error.message });
-    } 
-}
-
 const detailsProduct = (productId) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: productId });
@@ -53,4 +34,4 @@ const detailsProduct = (productId) => async (dispatch) => {
     }
 }
 
-export { listProducts, listProductsInCategory, listFilteredProducts, detailsProduct };
+export { listProducts, listProductsInCategory, detailsProduct };
