@@ -10,8 +10,16 @@ function MensScreen(props) {
     const productList = useSelector(state => state.productList);
     const { products, loading, error } = productList;
     const [properties, setProperties] = useState([]);
+    const [size, setSize] = useState(null);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const dispatch = useDispatch();
+
+    const sizeFilter = (arr) => size
+        ? arr.filter(product => product.sizesAvailable.find(entry => entry.size === size))
+        : arr;
+    const propertyFilter = (arr) => (properties.length > 0)
+        ? arr.filter(product => (properties.every(p => product.properties.indexOf(p) !== -1)))
+        : arr;
 
     useEffect(() => {
         dispatch(listProductsInCategory("Mens"));
@@ -27,19 +35,27 @@ function MensScreen(props) {
     //*********************//
 
     useEffect(() => {
-        properties.length === 0
-            ? setFilteredProducts(products)
-            : setFilteredProducts(products.filter(product => (
-                properties.every(p => product.properties.indexOf(p) !== -1)
-            )));
+        // const sizeFilter = (arr) => size
+        //     ? arr.filter(product => product.sizesAvailable.find(entry => entry.size === size))
+        //     : arr;
+        // const propertyFilter = (arr) => (properties.length > 0)
+        //     ? arr.filter(product => (properties.every(p => product.properties.indexOf(p) !== -1)))
+        //     : arr;
+        setFilteredProducts(sizeFilter(propertyFilter(products)));
         return () => {}
-    }, [properties])
+    }, [properties, size]);
 
     const handlePropertyChange = (isChecked, value) => {
         isChecked
             ? setProperties(properties => [...properties, value])
             : setProperties(properties => properties.filter(p => p !== value));
-    }
+    };
+
+    const handleSizeChange = (isChecked, value) => {
+        if (isChecked) {
+            setSize(value);
+        }
+    };
 
     return <Container className="content-container px-4 pt-0 pb-3" fluid>
         <Breadcrumb>
@@ -79,10 +95,11 @@ function MensScreen(props) {
                         [...Array(12).keys()].map(i => (
                             <Form.Check
                                 key={ i+1 }
+                                name="sizeOptions"
                                 label={ i+1 }
-                                type="checkbox"
+                                type="radio"
                                 value={ i+1 }
-                                onChange={ e => handlePropertyChange(e.target.checked, i+1) }
+                                onChange={ e => handleSizeChange(e.target.checked, i+1) }
                                 defaultChecked={ e => properties.indexOf((i+1) !== -1) }
                             />
                         ))
