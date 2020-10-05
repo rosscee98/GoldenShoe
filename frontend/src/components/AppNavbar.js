@@ -12,6 +12,10 @@ function AppNavbar(props) {
     const { basketItems } = basket;
     const basketTotal = basketItems.reduce((acc, cur) => acc + (parseInt(cur['qty']) || 0), 0);
 
+    const favourites = useSelector(state => state.favourites);
+    const { favouriteItems } = favourites;
+    const favouritesTotal = favouriteItems.length;
+
     return <Navbar expand="lg" className="round-edge mx-4 my-3">
         <LinkContainer to="/">
             <Navbar.Brand>
@@ -94,6 +98,11 @@ function AppNavbar(props) {
             <LinkContainer to="/favourites/">
                 <Button variant="outline-danger">
                     <FaHeart />
+                    {" "}
+                    <Badge variant="light">
+                        { favouritesTotal > 0 ? favouritesTotal : null }
+                    </Badge>
+                    <span className="sr-only">{ favouritesTotal > 0 ? "" : "Zero" } items in favourites</span>
                 </Button>
             </LinkContainer>
             <LinkContainer to="/basket/">
