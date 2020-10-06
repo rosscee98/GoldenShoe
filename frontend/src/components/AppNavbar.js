@@ -17,14 +17,6 @@ function AppNavbar(props) {
     const { favouriteItems } = favourites;
     const favouritesTotal = favouriteItems.length;
 
-    const [searchQuery, setSearchQuery] = useState(null);
-    const history = useHistory();
-
-    const handleSearch = () => {
-        if (searchQuery)
-            history.push("/products?query=" + searchQuery);
-    };
-
     return <Navbar expand="lg" className="round-edge mx-4 my-3">
         <LinkContainer to="/">
             <Navbar.Brand>
@@ -62,19 +54,6 @@ function AppNavbar(props) {
                 </LinkContainer>
             </span>
         </Nav>
-        <Form inline>
-            <FormControl
-                type="text"
-                placeholder="Search"
-                className="mb-0 mb-sm-2 mb-lg-0 mr-sm-2"
-                onChange={(e) => setSearchQuery(e.target.value)} 
-                //onKeyDown={(e) => (e.key === 'Enter' ? handleSearch() : null)}
-                onSubmit={() => handleSearch()}
-            />
-            <Button variant="outline-success" className="mb-2 mb-lg-0" type="submit"> {/*onClick={() => handleSearch()}*/}
-                Search
-            </Button>
-        </Form>
         <span className="navbar-page-icon d-none d-lg-block">
             <LinkContainer to="/favourites/">
                 <Button variant="outline-danger">

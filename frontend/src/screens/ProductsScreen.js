@@ -20,10 +20,6 @@ function ProductsScreen(props) {
 
     const createSliderWithTooltip = Slider.createSliderWithTooltip;
     const Range = createSliderWithTooltip(Slider.Range);
-    
-    const searchQuery = props.location.search
-        ? props.location.search.split("=")[1]
-        : null;
 
     const sizeFilter = (arr) => size
         ? arr.filter(product => product.sizesAvailable.find(entry => entry.size === size))
@@ -34,9 +30,6 @@ function ProductsScreen(props) {
     const costFilter = (arr) => arr.filter(product => 
         (product.price >= priceRange[0]) && (product.price <= priceRange[1]) 
     );
-    const searchQueryFilter = (arr) => searchQuery
-        ? arr.filter(product => product.name.toLowerCase().includes(searchQuery.toLowerCase()))
-        : arr;
 
     useEffect(() => {
         props.category
@@ -52,9 +45,9 @@ function ProductsScreen(props) {
     }, [products]);
 
     useEffect(() => {
-        setFilteredProducts(searchQueryFilter(costFilter(sizeFilter(propertyFilter(products)))));
+        setFilteredProducts(costFilter(sizeFilter(propertyFilter(products))));
         return () => {}
-    }, [properties, size, priceRange, searchQuery]);
+    }, [properties, size, priceRange]);
 
     const handlePropertyChange = (isChecked, value) => {
         isChecked
@@ -73,7 +66,6 @@ function ProductsScreen(props) {
     }
 
     return <Container className="content-container px-4 pt-0 pb-3" fluid>
-        { console.log(searchQuery) }
         <Breadcrumb>
             <LinkContainer to="/">
                 <Breadcrumb.Item>
