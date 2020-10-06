@@ -8,7 +8,7 @@ import ProductList from '../components/ProductList';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
-function MensScreen(props) {
+function ProductsScreen(props) {
     const productList = useSelector(state => state.productList);
     const { products, loading, error } = productList;
     const [filteredProducts, setFilteredProducts] = useState([]);
@@ -32,7 +32,7 @@ function MensScreen(props) {
     );
 
     useEffect(() => {
-        dispatch(listProductsInCategory("Mens"));
+        dispatch(listProductsInCategory(props.category));
         return () => {}
     }, [dispatch]);
 
@@ -70,7 +70,7 @@ function MensScreen(props) {
                     <AiOutlineHome />
                 </Breadcrumb.Item>
             </LinkContainer>
-            <Breadcrumb.Item active="true">Mens</Breadcrumb.Item>
+            <Breadcrumb.Item active="true">{ props.category }</Breadcrumb.Item>
         </Breadcrumb>
         <Row className="round-edge-bottom m-0">
             <Col id="filterContainer" className="bg-light-grey pt-2" md={3}>
@@ -138,4 +138,4 @@ function MensScreen(props) {
     </Container>
 }
 
-export default MensScreen;
+export default ProductsScreen;

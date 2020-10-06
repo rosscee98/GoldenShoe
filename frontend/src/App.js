@@ -6,11 +6,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
-import MensScreen from './screens/MensScreen';
 import AppNavbar from './components/AppNavbar';
 import AppFooter from './components/AppFooter';
 import BasketScreen from './screens/BasketScreen';
 import FavouritesScreen from './screens/FavouritesScreen';
+import ProductsScreen from './screens/ProductsScreen';
 
 function App() {
   return (
@@ -18,7 +18,15 @@ function App() {
       <div className="d-flex flex-column min-vh-100">
         <AppNavbar />
         <Route path="/" exact component={HomeScreen} />
-        <Route path="/mens" component={MensScreen} />
+        <Route path="/mens" render={props => (
+          <ProductsScreen {...props} category="Mens" />
+        )}/>
+        <Route path="/womens" render={props => (
+          <ProductsScreen {...props} category="Womens" />
+        )}/>
+        <Route path="/kids" render={props => (
+          <ProductsScreen {...props} category="Kids" />
+        )}/>
         <Route path="/product/:id" component={ProductScreen} />
         <Route path="/basket" component={BasketScreen} />
         <Route path="/favourites" component={FavouritesScreen} />
