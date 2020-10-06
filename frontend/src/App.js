@@ -11,6 +11,7 @@ import AppFooter from './components/AppFooter';
 import BasketScreen from './screens/BasketScreen';
 import FavouritesScreen from './screens/FavouritesScreen';
 import ProductsScreen from './screens/ProductsScreen';
+import FaqScreen from './screens/FaqScreen';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/product/:id" component={ProductScreen} />
         <Route path="/basket" component={BasketScreen} />
         <Route path="/favourites" component={FavouritesScreen} />
+        <Route path="/faq" component={FaqScreen} />
         <AppFooter />
       </div>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>

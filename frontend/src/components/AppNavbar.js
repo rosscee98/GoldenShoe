@@ -31,57 +31,15 @@ function AppNavbar(props) {
             <LinkContainer to="/mens">
                 <Nav.Link>Mens</Nav.Link>
             </LinkContainer>
-            {/* <NavDropdown title="Mens" id="dropdown-mens">
-                <LinkContainer to="/mens?kind=trainers">
-                    <NavDropdown.Item>Trainers</NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/mens?kind=shoes">
-                    <NavDropdown.Item>Shoes</NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/mens?kind=boots">
-                    <NavDropdown.Item>Boots</NavDropdown.Item>
-                </LinkContainer>
-                <NavDropdown.Divider />
-                <LinkContainer to="/mens">
-                    <NavDropdown.Item>View all</NavDropdown.Item>
-                </LinkContainer>
-            </NavDropdown> */}
             <LinkContainer to="/womens">
                 <Nav.Link>Womens</Nav.Link>
             </LinkContainer>
-            {/* <NavDropdown title="Womens" id="dropdown-womens">
-                <LinkContainer to="/womens?kind=trainers">
-                    <NavDropdown.Item>Trainers</NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/womens?kind=shoes">
-                    <NavDropdown.Item>Shoes</NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/womens?kind=boots">
-                    <NavDropdown.Item>Boots</NavDropdown.Item>
-                </LinkContainer>
-                <NavDropdown.Divider />
-                <LinkContainer to="/womens">
-                    <NavDropdown.Item>View all</NavDropdown.Item>
-                </LinkContainer>
-            </NavDropdown> */}
             <LinkContainer to="/kids">
                 <Nav.Link>Kids</Nav.Link>
             </LinkContainer>
-            {/* <NavDropdown title="Kids" id="dropdown-kids">
-                <LinkContainer to="/kids?kind=trainers">
-                    <NavDropdown.Item>Trainers</NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/kids?kind=shoes">
-                    <NavDropdown.Item>Shoes</NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/kids?kind=boots">
-                    <NavDropdown.Item>Boots</NavDropdown.Item>
-                </LinkContainer>
-                <NavDropdown.Divider />
-                <LinkContainer to="/kids">
-                    <NavDropdown.Item>View all</NavDropdown.Item>
-                </LinkContainer>
-            </NavDropdown> */}
+            <LinkContainer to="/faq">
+                <Nav.Link>FAQ</Nav.Link>
+            </LinkContainer>
             <span className="d-block d-lg-none">
                 <NavDropdown.Divider />
                 <LinkContainer to="/favourites/">
