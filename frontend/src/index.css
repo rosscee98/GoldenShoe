@@ -231,22 +231,27 @@ hr {
 
 /* BasketScreen.js */
 
+@media only screen and (max-width: 767px) { 
+  .bottom {
+    margin-top: 1rem;
+  }
+}
+
+.product-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
 .basket {
   display: flex;
   flex-wrap: wrap;
-  margin: 1rem;
   align-items: flex-start;
 }
 
 .basket-list {
   flex: 3 1 60rem;
-}
-
-.basket-action {
-  flex: 1 1 20rem;
-  background-color: #f8f8f8;
-  border-radius: .5rem;
-  padding: 1rem;
+  justify-content: left;
 }
 
 .basket-list-container {
@@ -257,16 +262,11 @@ hr {
 
 .basket-list-container li {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   align-items: flex-end;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
   border-bottom: .1rem #808080 solid;
-}
-
-.basket-list-container li img {
-  max-width: 10rem;
-  max-height: 10rem;
 }
 
 .basket-list-container li:first-child {
@@ -275,16 +275,14 @@ hr {
   align-items: flex-end;
 }
 
-.basket-image {
-  flex: 1 1;
+.basket-list-container li img {
+  max-width: 10rem;
+  max-height: 10rem;
 }
 
-.basket-name {
-  flex: 8 1;
-}
-
-.basket-price {
-  flex: 1 1;
-  font-size: 2.5rem;
-  text-align: right;
+.basket-action {
+  flex: 1 1 20rem;
+  background-color: #f8f8f8;
+  border-radius: .5rem;
+  padding: 1rem;
 }
