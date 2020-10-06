@@ -28,7 +28,10 @@ function AppNavbar(props) {
             <LinkContainer to="/">
                 <Nav.Link>Home</Nav.Link>
             </LinkContainer>
-            <NavDropdown title="Mens" id="dropdown-mens">
+            <LinkContainer to="/mens">
+                <Nav.Link>Mens</Nav.Link>
+            </LinkContainer>
+            {/* <NavDropdown title="Mens" id="dropdown-mens">
                 <LinkContainer to="/mens?kind=trainers">
                     <NavDropdown.Item>Trainers</NavDropdown.Item>
                 </LinkContainer>
@@ -42,8 +45,11 @@ function AppNavbar(props) {
                 <LinkContainer to="/mens">
                     <NavDropdown.Item>View all</NavDropdown.Item>
                 </LinkContainer>
-            </NavDropdown>
-            <NavDropdown title="Womens" id="dropdown-womens">
+            </NavDropdown> */}
+            <LinkContainer to="/womens">
+                <Nav.Link>Womens</Nav.Link>
+            </LinkContainer>
+            {/* <NavDropdown title="Womens" id="dropdown-womens">
                 <LinkContainer to="/womens?kind=trainers">
                     <NavDropdown.Item>Trainers</NavDropdown.Item>
                 </LinkContainer>
@@ -57,8 +63,11 @@ function AppNavbar(props) {
                 <LinkContainer to="/womens">
                     <NavDropdown.Item>View all</NavDropdown.Item>
                 </LinkContainer>
-            </NavDropdown>
-            <NavDropdown title="Kids" id="dropdown-kids">
+            </NavDropdown> */}
+            <LinkContainer to="/kids">
+                <Nav.Link>Kids</Nav.Link>
+            </LinkContainer>
+            {/* <NavDropdown title="Kids" id="dropdown-kids">
                 <LinkContainer to="/kids?kind=trainers">
                     <NavDropdown.Item>Trainers</NavDropdown.Item>
                 </LinkContainer>
@@ -72,14 +81,14 @@ function AppNavbar(props) {
                 <LinkContainer to="/kids">
                     <NavDropdown.Item>View all</NavDropdown.Item>
                 </LinkContainer>
-            </NavDropdown>
+            </NavDropdown> */}
             <span className="d-block d-lg-none">
                 <NavDropdown.Divider />
                 <LinkContainer to="/favourites/">
-                    <Nav.Link>Favourites</Nav.Link>
+                    <Nav.Link>Favourites { favouritesTotal > 0 ? `(${favouritesTotal})` : null }</Nav.Link>
                 </LinkContainer>
                 <LinkContainer to="/basket/">
-                    <Nav.Link>Basket</Nav.Link>
+                    <Nav.Link>Basket { basketTotal > 0 ? `(${basketTotal})` : null }</Nav.Link>
                 </LinkContainer>
             </span>
             
