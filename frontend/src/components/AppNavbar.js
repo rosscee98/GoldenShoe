@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Badge, Button, Form, FormControl, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { BsBagFill } from 'react-icons/bs';
 import { FaHeart } from 'react-icons/fa';
 import { GiRunningShoe } from 'react-icons/gi';
+import { useHistory } from 'react-router-dom';
 
 function AppNavbar(props) {
 
@@ -15,6 +16,14 @@ function AppNavbar(props) {
     const favourites = useSelector(state => state.favourites);
     const { favouriteItems } = favourites;
     const favouritesTotal = favouriteItems.length;
+
+    const [searchQuery, setSearchQuery] = useState(null);
+    const history = useHistory();
+
+    const handleSearch = () => {
+        if (searchQuery)
+            history.push("/products?query=" + searchQuery);
+    };
 
     return <Navbar expand="lg" className="round-edge mx-4 my-3">
         <LinkContainer to="/">
@@ -37,6 +46,9 @@ function AppNavbar(props) {
             <LinkContainer to="/kids">
                 <Nav.Link>Kids</Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/products">
+                <Nav.Link>View all</Nav.Link>
+            </LinkContainer>
             <LinkContainer to="/faq">
                 <Nav.Link>FAQ</Nav.Link>
             </LinkContainer>
@@ -49,11 +61,19 @@ function AppNavbar(props) {
                     <Nav.Link>Basket { basketTotal > 0 ? `(${basketTotal})` : null }</Nav.Link>
                 </LinkContainer>
             </span>
-            
         </Nav>
         <Form inline>
-            <FormControl type="text" placeholder="Search" className="mb-0 mb-sm-2 mb-lg-0 mr-sm-2" />
-            <Button variant="outline-success" className="mb-2 mb-lg-0">Search</Button>
+            <FormControl
+                type="text"
+                placeholder="Search"
+                className="mb-0 mb-sm-2 mb-lg-0 mr-sm-2"
+                onChange={(e) => setSearchQuery(e.target.value)} 
+                //onKeyDown={(e) => (e.key === 'Enter' ? handleSearch() : null)}
+                onSubmit={() => handleSearch()}
+            />
+            <Button variant="outline-success" className="mb-2 mb-lg-0" type="submit"> {/*onClick={() => handleSearch()}*/}
+                Search
+            </Button>
         </Form>
         <span className="navbar-page-icon d-none d-lg-block">
             <LinkContainer to="/favourites/">

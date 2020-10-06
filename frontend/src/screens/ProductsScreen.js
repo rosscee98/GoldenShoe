@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Breadcrumb, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { listProductsInCategory } from '../actions/productActions';
+import { listProducts, listProductsInCategory } from '../actions/productActions';
 import { AiOutlineHome } from 'react-icons/ai';
 import ProductList from '../components/ProductList';
 import Slider from 'rc-slider';
@@ -20,6 +20,10 @@ function ProductsScreen(props) {
 
     const createSliderWithTooltip = Slider.createSliderWithTooltip;
     const Range = createSliderWithTooltip(Slider.Range);
+    
+    const searchQuery = props.location.search
+        ? props.location.search.split("=")[1]
+        : null;
 
     const sizeFilter = (arr) => size
         ? arr.filter(product => product.sizesAvailable.find(entry => entry.size === size))
@@ -30,9 +34,14 @@ function ProductsScreen(props) {
     const costFilter = (arr) => arr.filter(product => 
         (product.price >= priceRange[0]) && (product.price <= priceRange[1]) 
     );
+    const searchQueryFilter = (arr) => searchQuery
+        ? arr.filter(product => product.name.toLowerCase().includes(searchQuery.toLowerCase()))
+        : arr;
 
     useEffect(() => {
-        dispatch(listProductsInCategory(props.category));
+        props.category
+            ? dispatch(listProductsInCategory(props.category))
+            : dispatch(listProducts());
         return () => {}
     }, [dispatch]);
 
@@ -43,9 +52,9 @@ function ProductsScreen(props) {
     }, [products]);
 
     useEffect(() => {
-        setFilteredProducts(costFilter(sizeFilter(propertyFilter(products))));
+        setFilteredProducts(searchQueryFilter(costFilter(sizeFilter(propertyFilter(products)))));
         return () => {}
-    }, [properties, size, priceRange]);
+    }, [properties, size, priceRange, searchQuery]);
 
     const handlePropertyChange = (isChecked, value) => {
         isChecked
@@ -64,13 +73,14 @@ function ProductsScreen(props) {
     }
 
     return <Container className="content-container px-4 pt-0 pb-3" fluid>
+        { console.log(searchQuery) }
         <Breadcrumb>
             <LinkContainer to="/">
                 <Breadcrumb.Item>
                     <AiOutlineHome />
                 </Breadcrumb.Item>
             </LinkContainer>
-            <Breadcrumb.Item active="true">{ props.category }</Breadcrumb.Item>
+            <Breadcrumb.Item active="true">{ props.category ? props.category : "All products" }</Breadcrumb.Item>
         </Breadcrumb>
         <Row className="round-edge-bottom m-0">
             <Col id="filterContainer" className="bg-light-grey pt-2" md={3}>

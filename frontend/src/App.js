@@ -28,6 +28,7 @@ function App() {
         <Route path="/kids" render={props => (
           <ProductsScreen {...props} category="Kids" />
         )}/>
+        <Route path="/products" component={ProductsScreen} />
         <Route path="/product/:id" component={ProductScreen} />
         <Route path="/basket" component={BasketScreen} />
         <Route path="/favourites" component={FavouritesScreen} />

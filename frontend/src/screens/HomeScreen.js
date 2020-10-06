@@ -3,8 +3,6 @@ import { Carousel, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import TextLoop from 'react-text-loop';
 
-//<div className="carousel-wrapper d-none d-md-block">
-
 function HomeScreen(props) {
     return <Container className="px-4 pt-0 pb-3" fluid>
         <Carousel className="round-edge d-none d-md-block" interval={5000}>
@@ -15,7 +13,7 @@ function HomeScreen(props) {
                     alt="First slide"
                 />
                 <Carousel.Caption className="round-edge">
-                    <Link to="/">
+                    <Link to="/mens">
                         <h3>50% off men's boots</h3>
                         <p>Valid during October</p>
                     </Link>
@@ -28,7 +26,7 @@ function HomeScreen(props) {
                     alt="Second slide"
                 />
                 <Carousel.Caption className="round-edge">
-                    <Link to="/">
+                    <Link to="/womens">
                         <h3>Women's heels</h3>
                         <p>100's to choose from</p>
                     </Link>
@@ -41,7 +39,7 @@ function HomeScreen(props) {
                     alt="Third slide"
                 />
                 <Carousel.Caption className="round-edge">
-                    <Link to="/">
+                    <Link to="/womens">
                         <h3>Women's running shoes</h3>
                         <p>New range available</p>
                     </Link>

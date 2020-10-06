@@ -16,7 +16,7 @@ function ProductList(props) {
         <div style={{'display': 'flex'}}>
             <p className="text-muted mb-0 mr-auto">{ props.products.length } products found</p>
             {/* <p>Sort by: </p> */}
-            <Form inline style={{'align-items': 'flex-start'}}>
+            <Form inline>
                 <Form.Label className="text-muted mr-1">Sort by:</Form.Label>
                 <Form.Control
                     as="select"
