@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Breadcrumb, Col, Container, Form, Row, Spinner } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
-import { listProducts, listProductsInCategory } from '../actions/productActions'
 import { AiOutlineHome } from 'react-icons/ai'
-import ProductList from '../components/ProductList'
 import Slider from 'rc-slider'
+import { listProducts, listProductsInCategory } from '../actions/productActions'
+import ProductList from '../components/ProductList'
 import 'rc-slider/assets/index.css'
 
 function ProductsScreen(props) {
@@ -18,7 +18,7 @@ function ProductsScreen(props) {
   const [size, setSize] = useState(null)
   const [priceRange, setPriceRange] = useState([0, 200])
 
-  const createSliderWithTooltip = Slider.createSliderWithTooltip
+  const { createSliderWithTooltip } = Slider
   const Range = createSliderWithTooltip(Slider.Range)
 
   useEffect(() => {
@@ -36,22 +36,22 @@ function ProductsScreen(props) {
 
   useEffect(() => {
     const sizeFilter = (arr) =>
-        size
+      size
         ? arr.filter((product) =>
             product.sizesAvailable.find((entry) => entry.size === size),
-            )
+          )
         : arr
     const propertyFilter = (arr) =>
-        properties.length > 0
+      properties.length > 0
         ? arr.filter((product) =>
             properties.every((p) => product.properties.indexOf(p) !== -1),
-            )
+          )
         : arr
     const costFilter = (arr) =>
-        arr.filter(
+      arr.filter(
         (product) =>
-            product.price >= priceRange[0] && product.price <= priceRange[1],
-        )
+          product.price >= priceRange[0] && product.price <= priceRange[1],
+      )
     setFilteredProducts(costFilter(sizeFilter(propertyFilter(products))))
     return () => {}
   }, [properties, size, priceRange, products])
@@ -96,7 +96,7 @@ function ProductsScreen(props) {
                 type="checkbox"
                 value={colour}
                 onChange={(e) => handlePropertyChange(e.target.checked, colour)}
-                //defaultChecked={ e => properties.indexOf(colour !== -1) }
+                // defaultChecked={ e => properties.indexOf(colour !== -1) }
                 defaultChecked={false}
               />
             ))}
@@ -124,7 +124,7 @@ function ProductsScreen(props) {
               min={10}
               max={200}
               defaultValue={priceRange}
-              pushable={true}
+              pushable
               step={10}
               tipFormatter={(value) => `£${value}`}
               onAfterChange={handlePriceChange}

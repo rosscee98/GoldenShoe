@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-  Badge,
-  Button,
-  Nav,
-  Navbar,
-  NavDropdown,
-} from 'react-bootstrap'
+import { Badge, Button, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
 import { BsBagFill } from 'react-icons/bs'
@@ -16,7 +10,7 @@ function AppNavbar(props) {
   const basket = useSelector((state) => state.basket)
   const { basketItems } = basket
   const basketTotal = basketItems.reduce(
-    (acc, cur) => acc + (parseInt(cur['qty']) || 0),
+    (acc, cur) => acc + (parseInt(cur.qty) || 0),
     0,
   )
 

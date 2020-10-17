@@ -1,17 +1,17 @@
 import Axios from 'axios'
+import Cookie from 'js-cookie'
 import {
   BASKET_ADD_ITEM,
   BASKET_INCREMENT_ITEM,
   BASKET_REMOVE_ITEM,
 } from '../constants/basketConstants'
-import Cookie from 'js-cookie'
 
 const addToBasket = (productId, size, countInStock, qty) => async (
   dispatch,
   getState,
 ) => {
   try {
-    const { data } = await Axios.get('/api/products/' + productId)
+    const { data } = await Axios.get(`/api/products/${productId}`)
     dispatch({
       type: BASKET_ADD_ITEM,
       payload: {
@@ -40,7 +40,7 @@ const incrementInBasket = (productId, size, countInStock) => async (
   getState,
 ) => {
   try {
-    const { data } = await Axios.get('/api/products/' + productId)
+    const { data } = await Axios.get(`/api/products/${productId}`)
     dispatch({
       type: BASKET_INCREMENT_ITEM,
       payload: {
@@ -67,7 +67,7 @@ const removeFromBasket = (productId, size) => async (dispatch, getState) => {
   try {
     dispatch({
       type: BASKET_REMOVE_ITEM,
-      payload: { product: productId, size: size },
+      payload: { product: productId, size },
     })
     const {
       basket: { basketItems },

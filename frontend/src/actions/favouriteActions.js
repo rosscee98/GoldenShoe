@@ -7,7 +7,7 @@ import {
 
 const addToFavourites = (productId) => async (dispatch, getState) => {
   try {
-    const { data } = await Axios.get('/api/products/' + productId)
+    const { data } = await Axios.get(`/api/products/${productId}`)
     dispatch({
       type: FAVOURITES_ADD_ITEM,
       payload: {

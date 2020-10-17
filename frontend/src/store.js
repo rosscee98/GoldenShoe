@@ -1,10 +1,10 @@
 import { combineReducers, createStore, compose, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+import Cookie from 'js-cookie'
 import {
   productListReducer,
   productDetailsReducer,
 } from './reducers/productReducers'
-import thunk from 'redux-thunk'
-import Cookie from 'js-cookie'
 import { basketReducer } from './reducers/basketReducers'
 import { favouritesReducer } from './reducers/favouritesReducers'
 

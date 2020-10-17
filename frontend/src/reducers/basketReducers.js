@@ -17,9 +17,9 @@ function basketReducer(state = { basketItems: [] }, action) {
             x.product === item.product && x.size === item.size ? item : x,
           ),
         }
-      } else {
-        return { basketItems: [...state.basketItems, item] }
       }
+      return { basketItems: [...state.basketItems, item] }
+
     case BASKET_INCREMENT_ITEM:
       var item = action.payload
       var product = state.basketItems.find(
@@ -36,10 +36,10 @@ function basketReducer(state = { basketItems: [] }, action) {
             x.product === item.product && x.size === item.size ? item : x,
           ),
         }
-      } else {
-        item.qty = 1
-        return { basketItems: [...state.basketItems, item] }
       }
+      item.qty = 1
+      return { basketItems: [...state.basketItems, item] }
+
     case BASKET_REMOVE_ITEM:
       return {
         basketItems: state.basketItems.filter(

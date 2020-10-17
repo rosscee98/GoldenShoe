@@ -10,17 +10,17 @@ import {
   Spinner,
   Alert,
 } from 'react-bootstrap'
-import { detailsProduct } from '../actions/productActions'
-import {
-  addToFavourites,
-  removeFromFavourites,
-} from '../actions/favouriteActions'
 import { incrementInBasket } from '../actions/basketActions'
 import ImageGallery from 'react-image-gallery'
 import 'react-image-gallery/styles/css/image-gallery.css'
 import { AiOutlineHome } from 'react-icons/ai'
 import { RiHeartAddFill } from 'react-icons/ri'
 import { IoMdHeartDislike } from 'react-icons/io'
+import {
+  addToFavourites,
+  removeFromFavourites,
+} from '../actions/favouriteActions'
+import { detailsProduct } from '../actions/productActions'
 
 function ProductScreen(props) {
   const productDetails = useSelector((state) => state.productDetails)
@@ -52,7 +52,7 @@ function ProductScreen(props) {
   }, [anySizesAvailable, product])
 
   const handleAddToBasket = (productId, sizeAndCount) => {
-    var array = sizeAndCount.split(',')
+    const array = sizeAndCount.split(',')
     dispatch(
       incrementInBasket(productId, parseInt(array[0]), parseInt(array[1])),
     )
@@ -79,7 +79,7 @@ function ProductScreen(props) {
             <AiOutlineHome />
           </Breadcrumb.Item>
         </LinkContainer>
-        <LinkContainer to={'/' + product.category}>
+        <LinkContainer to={`/${product.category}`}>
           <Breadcrumb.Item>{product.category}</Breadcrumb.Item>
         </LinkContainer>
         <Breadcrumb.Item active="true">{product.name}</Breadcrumb.Item>
@@ -96,16 +96,16 @@ function ProductScreen(props) {
             thumbnailPosition={window.screen.width > 768 ? 'left' : 'bottom'}
             items={[
               {
-                original: `${product.image}`,
-                thumbnail: `${product.image}`,
+                original: `${product.image}img1.jpg`,
+                thumbnail: `${product.image}img1.jpg`,
               },
               {
-                original: `${product.image}`,
-                thumbnail: `${product.image}`,
+                original: `${product.image}img2.jpg`,
+                thumbnail: `${product.image}img2.jpg`,
               },
               {
-                original: `${product.image}`,
-                thumbnail: `${product.image}`,
+                original: `${product.image}img3.jpg`,
+                thumbnail: `${product.image}img3.jpg`,
               },
             ]}
           />
@@ -143,16 +143,14 @@ function ProductScreen(props) {
               >
                 {product.sizesAvailable
                   .sort((a, b) => (a.size > b.size ? 1 : -1))
-                  .map((entry) => {
-                    return (
-                      <option
-                        key={entry.size}
-                        value={[entry.size, entry.countInStock]}
-                      >
-                        {entry.size}
-                      </option>
-                    )
-                  })}
+                  .map((entry) => (
+                    <option
+                      key={entry.size}
+                      value={[entry.size, entry.countInStock]}
+                    >
+                      {entry.size}
+                    </option>
+                  ))}
               </Form.Control>
             </Form.Group>
           ) : (

@@ -28,10 +28,10 @@ function FavouritesScreen(props) {
                 <li>
                   <Row className="product-row px-3 w-100">
                     <Col xs={12} sm={6} md={3}>
-                      <Image src={item.image} alt={item.name} />
+                      <Image src={`${item.image}img1.jpg`} alt={item.name} />
                     </Col>
                     <Col xs={12} sm={6} md={3} className="bottom">
-                      <Link to={'/product/' + item.product}>
+                      <Link to={`/product/${item.product}`}>
                         <h3>{item.name}</h3>
                       </Link>
                     </Col>

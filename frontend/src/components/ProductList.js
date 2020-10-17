@@ -23,7 +23,6 @@ function ProductList(props) {
         <p className="text-muted mb-0 mr-auto">
           {props.products.length} products found
         </p>
-        {/* <p>Sort by: </p> */}
         <Form inline>
           <Form.Label className="text-muted mr-1">Sort by:</Form.Label>
           <Form.Control as="select" onChange={(e) => setSort(e.target.value)}>
@@ -46,32 +45,30 @@ function ProductList(props) {
         </Form>
       </div>
       <ul className="products">
-        {props.products.sort(sorters[sort]).map((product) => {
-          return (
-            <li key={product._id}>
-              {product.sizesAvailable.length === 0 && (
-                <h4 id="soldOutTag" className="rounded d-flex">
-                  Sold out
-                </h4>
-              )}
-              <Card className="product">
-                {' '}
-                {/* style={product.sizesAvailable.length === 0 ? {'transform': 'translateY(-20px)'} : null} */}
-                <Link to={'/product/' + product._id}>
-                  <Card.Img variant="top" src={product.image} />
+        {props.products.sort(sorters[sort]).map((product) => (
+          <li key={product._id}>
+            {product.sizesAvailable.length === 0 && (
+              <h4 id="soldOutTag" className="rounded d-flex">
+                Sold out
+              </h4>
+            )}
+            <Card className="product">
+              {' '}
+              {/* style={product.sizesAvailable.length === 0 ? {'transform': 'translateY(-20px)'} : null} */}
+              <Link to={`/product/${product._id}`}>
+                <Card.Img variant="top" src={`${product.image}img1.jpg`} />
+              </Link>
+              <Card.Body>
+                <Link to={`/product/${product._id}`}>
+                  <Card.Title>{product.name}</Card.Title>
+                  <Card.Subtitle className="text-muted">
+                    £{product.price}
+                  </Card.Subtitle>
                 </Link>
-                <Card.Body>
-                  <Link to={'/product/' + product._id}>
-                    <Card.Title>{product.name}</Card.Title>
-                    <Card.Subtitle className="text-muted">
-                      £{product.price}
-                    </Card.Subtitle>
-                  </Link>
-                </Card.Body>
-              </Card>
-            </li>
-          )
-        })}
+              </Card.Body>
+            </Card>
+          </li>
+        ))}
       </ul>
     </div>
   )
